@@ -2,15 +2,15 @@
     <div appWidget class="widget">
         <div class="input-box">
             <label>E-mail</label>
-            <input appInput type="email">
+            <input appInput type="email" #email>
         </div>
         <div class="input-box">
             <label>Hasło</label>
-            <input appInput type="password">
+            <input appInput type="password" #password>
         </div>
         <div class="btn-box">
-            <button appButton (click)="onLogin()">Zaloguj się</button>
-            <button appButton>Zarejestruj się</button>
+            <button appButton (click)="onLogin(email.value, password.value)">Zaloguj się</button>
+            <button appButton (click)="onRegister(email.value, password.value)">Zarejestruj się</button>
         </div>
         <div class="alternative-login">
             <p>Wybierz inną metodę logowania</p>
