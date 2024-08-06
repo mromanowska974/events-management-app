@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    font-family: 'PTSans';
+}
+
+.info {
+    display: flex;
+}
+
+.content {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+@media (orientation: landscape) {
+    h1 {
+        margin-left: 30px;
+    }    
+    
+    .content {
+        width: 80%;
+    }
+
+    button {
+        align-self: center;
+    }
+}
+
+@media (orientation: portrait) {
+    h1 {
+        margin-left: 10px;
+    }   
+
+    .info {
+        flex-direction: column;
+    }
+
+    button {
+        align-self: flex-end;
+        margin: 10px;
+    }
+}

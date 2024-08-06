@@ -1,0 +1,52 @@
+.container{
+    display: flex;
+    background-color: var(--darkRed);
+    height: 8vh;
+    width: 100vw;
+}
+
+input {
+    width: 50vw;
+    height: 50%;
+    margin: 15px;
+}
+
+.btn-box{
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 10px 5px 2vw;
+}
+
+.btn-box button {
+    border: none;
+    background-color: transparent;
+    height: 100%;
+    padding: 0;
+    width: 18%;
+}
+
+.btn-box button img {
+    width: 80%;
+}
+
+
+
+@media (orientation: landscape) {
+    .container{
+        justify-content: end;
+    }
+
+    .btn-box {
+        width: 23vw;
+    }
+}
+
+@media (orientation: portrait) {
+    .container{
+        justify-content: space-between;
+    }
+
+    .btn-box{
+        width: 50vw;
+    }
+}
