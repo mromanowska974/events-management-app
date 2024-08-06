@@ -15,10 +15,10 @@
         <div class="alternative-login">
             <p>Wybierz inną metodę logowania</p>
             <div class="btn-box">
-                <button>
+                <button (click)="onGoogleLogin()">
                     <img width="30px" src="../../assets/icons/google-icon.png">
                 </button>
-                <button>
+                <button (click)="onFBLogin()">
                     <img width="30px" src="../../assets/icons/fb-icon.png">
                 </button>
             </div>

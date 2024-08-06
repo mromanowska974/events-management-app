@@ -24,7 +24,9 @@ export class LoginComponent {
 
   onLogin(email: string, password: string){
     this.loginService.login(email, password).then(data => {
-      this.setActiveUser(data.user.uid);      
+      this.userService.getUser(data.uid).then(user => {
+        this.setActiveUser(data.uid, user); 
+      })     
     }).catch(error => {
       console.log(error)
     })
@@ -32,19 +34,48 @@ export class LoginComponent {
 
   onRegister(email: string, password: string){
     this.loginService.register(email, password).then(data => {
-      this.userService.createUser(data.user.uid, data.user.email).then(() => {
-        this.setActiveUser(data.user.uid);
+      this.userService.createUser(data.uid, data.email).then(() => {
+        this.userService.getUser(data.uid).then(user => {
+          this.setActiveUser(data.uid, user); 
+        })   
       })
     }).catch(error => {
       console.log(error)
     })
   }
 
-  setActiveUser(uid: string){
-    this.userService.getUser(uid).then(user => {
-      this.userService.setActiveUser(user)
-      localStorage.setItem('uid', uid)
-      this.router.navigate(['main-page'])
+  onGoogleLogin(){
+    this.loginService.googleLogin().then(data => {
+      this.handleAlternativeLogin(data);
     })
+  }
+
+  onFBLogin(){
+    this.loginService.facebookLogin().then(data => {
+      this.handleAlternativeLogin(data);
+    })
+  }
+
+  private handleAlternativeLogin(data: any){
+    console.log(data)
+    this.userService.getUser(data.uid).then(user => {
+      console.log(user)
+      if(user !== null && user !== undefined){
+        this.setActiveUser(data.uid, user)
+      }
+      else{
+        this.userService.createUser(data.uid, data.email).then(() => {
+          this.userService.getUser(data.uid).then(user => {
+            this.setActiveUser(data.uid, user)
+          })
+        })
+      }
+    })
+  }
+
+  private setActiveUser(uid: string, user: any){
+    this.userService.setActiveUser(user)
+    localStorage.setItem('uid', uid)
+    this.router.navigate(['main-page'])
   }
 }

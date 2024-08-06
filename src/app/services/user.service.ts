@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { doc, Firestore, getDoc, setDoc } from '@angular/fire/firestore';
+import { collection, doc, Firestore, getDoc, query, setDoc, where } from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
