@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { InputDirective } from '../directives/input.directive';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -11,5 +12,10 @@ import { InputDirective } from '../directives/input.directive';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+  router = inject(Router);
 
+  onLogout(){
+    localStorage.removeItem('uid');
+    this.router.navigate(['login'])
+  }
 }
