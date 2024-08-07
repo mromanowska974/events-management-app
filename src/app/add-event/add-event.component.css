@@ -1,0 +1,62 @@
+.container {
+    align-items: center;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 70%;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.inputs-box {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: 80%;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
+}
+
+input, textarea {
+    width: 100%;
+}
+
+textarea {
+    resize: none;
+}
+
+.btn-box {
+    width: 70%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+button {
+    width: 70px;
+}
+
+.radio-input {
+    display: flex;
+}
+
+p {
+    color: red;
+}
+
+@media (orientation: portrait) {
+    form {
+        width: 80%;
+    }
+}

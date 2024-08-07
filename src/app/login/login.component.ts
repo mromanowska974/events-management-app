@@ -5,6 +5,7 @@ import { WidgetDirective } from '../directives/widget.directive';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
 import { UserService } from '../services/user.service';
+import { ContainerDirective } from '../directives/container.directive';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ import { UserService } from '../services/user.service';
   imports: [
     ButtonDirective,
     InputDirective,
-    WidgetDirective
+    WidgetDirective,
+    ContainerDirective
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'

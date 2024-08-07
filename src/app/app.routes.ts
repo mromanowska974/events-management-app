@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { AddEventComponent } from './add-event/add-event.component';
 
 export const routes: Routes = [
     {
@@ -11,5 +12,8 @@ export const routes: Routes = [
     },
     {
         path: 'main-page', component: MainPageComponent
+    },
+    {
+        path: 'add-event', component: AddEventComponent
     }
 ];

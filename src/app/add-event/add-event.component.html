@@ -1,0 +1,74 @@
+<div class="container" appContainer>
+    <form appWidget (ngSubmit)="onSubmit(eventForm)" #eventForm="ngForm">
+        <div class="inputs-box">
+            <p *ngIf="errorMsg.length > 0"> {{ errorMsg }} </p>
+            <div class="input-box">
+                <label>Nazwa</label>
+                <input 
+                    type="text"
+                    ngModel
+                    name="name"
+                    required
+                    appInput
+                >
+            </div>
+            <div class="input-box">
+                <label>Opis</label>
+                <textarea 
+                    ngModel
+                    rows="3"
+                    name="description"
+                    required
+                    appInput
+                ></textarea>
+            </div>
+            <div class="input-box">
+                <label>Data</label>
+                <input 
+                    appInput 
+                    type="date"
+                    ngModel
+                    name="date"
+                    required
+                >
+            </div>
+            <div class="input-box">
+                <label>Miejsce</label>
+                <input 
+                    appInput
+                    type="text"
+                    ngModel
+                    name="place"
+                    required
+                >
+            </div>
+            <div class="input-box">
+                <label>Maksymalna ilość członków</label>
+                <input 
+                    appInput 
+                    type="number"
+                    ngModel
+                    name="membersAmount"
+                    required
+                    min="2"
+                >
+            </div>
+            <div class="input-box">
+                <label>Dostęp</label>
+                <select
+                    appInput
+                    name="access"
+                    ngModel
+                    required
+                >
+                    <option>Publiczne</option>
+                    <option>Prywatne</option>
+                </select>
+            </div>
+        </div>
+        <div class="btn-box">
+            <button type="submit" appButton>Dodaj</button>
+            <button type="button" (click)="onGoBack()" appButton>Anuluj</button>
+        </div>
+    </form>
+</div>
