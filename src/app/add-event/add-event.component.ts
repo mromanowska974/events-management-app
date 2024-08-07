@@ -42,6 +42,6 @@ export class AddEventComponent {
   }
 
   onGoBack(){
-    this.router.navigate(['main-page'])
+    this.router.navigate(['page', 'main-page'])
   }
 }

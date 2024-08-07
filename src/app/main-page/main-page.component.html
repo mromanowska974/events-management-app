@@ -1,12 +1,6 @@
 <div class="container" appContainer>
-    <app-navbar></app-navbar>
     <div class="events-list">
-        <app-event-card></app-event-card>
-        <app-event-card></app-event-card>
-        <app-event-card></app-event-card>
-        <app-event-card></app-event-card>
-        <app-event-card></app-event-card>
-        <app-event-card></app-event-card>
+        <app-event-card *ngFor="let event of publicEvents" [event]="event"></app-event-card>
     </div>
     <button class="add-btn" (click)="onAddEvent()">
         <img src="../../assets/icons/add-icon.svg">

@@ -78,6 +78,6 @@ export class LoginComponent {
   private setActiveUser(uid: string, user: any){
     this.userService.setActiveUser(user)
     localStorage.setItem('uid', uid)
-    this.router.navigate(['main-page'])
+    this.router.navigate(['page', 'main-page'])
   }
 }

@@ -1,12 +1,16 @@
 <div appWidget class="container">
-    <h1>Wydarzenie 1</h1>
+    <h1>{{event.name}}</h1>
     <div class="info">
         <div class="content">
-            <p>19-07-2024</p>
-            <p>Jastrzębie-Zdrój</p>
-            <p>10 osób</p>
-            <p>Publiczne</p>
+            <p>{{ event.date }}</p>
+            <p>{{ event.place }}</p>
+            <p>{{ 
+                event.members.length+1 +'/'+ event.membersAmount
+            }} {{ 
+                (event.membersAmount%10 >= 2 && event.membersAmount%10 <= 4) && (event.membersAmount%100 < 12 || event.membersAmount%100 > 14) ? ' osoby' : ' osób'
+            }}</p>
+            <p>{{ event.access }}</p>
         </div>
-        <button appButton>Poproś o dołączenie</button>
+        <button appButton>Wyświetl informacje</button>
     </div>
 </div>

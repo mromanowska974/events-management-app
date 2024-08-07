@@ -1,0 +1,12 @@
+.container {
+    align-items: center;
+}
+
+.section {
+    width: 80%;
+}
+
+.events-list {
+    height: 30vh;
+    overflow-y: auto;
+}

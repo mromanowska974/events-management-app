@@ -1,5 +1,8 @@
 <div class="container">
-    <input appInput placeholder="Wyszukaj wydarzenie...">
+    <a *ngIf="activePage !== 'main-page'" [routerLink]="['main-page']">
+        Wróć do strony głównej
+    </a>
+    <input *ngIf="activePage === 'main-page'" appInput placeholder="Wyszukaj wydarzenie...">
     <div class="btn-box">
         <button>
             <img src="../../assets/icons/chat-icon.svg">
@@ -7,7 +10,10 @@
         <button>
             <img src="../../assets/icons/notification-icon.svg">
         </button>
-        <button>
+        <button *ngIf="activePage === 'user-panel'">
+            <img src="../../assets/icons/settings-icon.svg">
+        </button>
+        <button *ngIf="activePage !== 'user-panel'" (click)="onUserPanel()">
             <img src="../../assets/icons/user-icon.svg">
         </button>
         <button>

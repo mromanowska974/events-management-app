@@ -11,6 +11,14 @@ input {
     margin: 15px;
 }
 
+a {
+    padding: 15px;
+    color: white;
+    font-family: 'PTSans';
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .btn-box{
     display: flex;
     justify-content: space-between;
