@@ -4,6 +4,7 @@ import { ContainerDirective } from '../directives/container.directive';
 import { WidgetDirective } from '../directives/widget.directive';
 import { ButtonDirective } from '../directives/button.directive';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-details',
@@ -20,6 +21,7 @@ import { CommonModule } from '@angular/common';
 })
 export class EventDetailsComponent implements OnInit{
   navigationService = inject(NavigationService);
+  router = inject(Router);
 
   event: any;
   uid: string = '';
@@ -29,5 +31,9 @@ export class EventDetailsComponent implements OnInit{
       this.event = JSON.parse(localStorage.getItem('event')!)
       this.uid = localStorage.getItem('uid')!;
       console.log(this.event)
+  }
+
+  onEditEvent() {
+    this.router.navigate(['edit-event'])
   }
 }

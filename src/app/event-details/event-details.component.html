@@ -54,7 +54,7 @@
                     <button appButton *ngIf="event.ownerId === uid">
                         Zaproś uzytkownika
                     </button>
-                    <button appButton *ngIf="event.ownerId === uid">
+                    <button appButton *ngIf="event.ownerId === uid" (click)="onEditEvent()">
                         Modyfikuj wydarzenie
                     </button>
                     <button appButton *ngIf="event.ownerId === uid">

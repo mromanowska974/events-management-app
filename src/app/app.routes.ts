@@ -17,6 +17,9 @@ export const routes: Routes = [
         path: 'add-event', component: AddEventComponent
     },
     {
+        path: 'edit-event', component: AddEventComponent
+    },
+    {
         path: 'page', 
         component: PageContainerComponent,
         children: [

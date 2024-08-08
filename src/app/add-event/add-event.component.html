@@ -6,7 +6,7 @@
                 <label>Nazwa</label>
                 <input 
                     type="text"
-                    ngModel
+                    [ngModel]="editMode ? editedEvent.name : ''"
                     name="name"
                     required
                     appInput
@@ -15,7 +15,7 @@
             <div class="input-box">
                 <label>Opis</label>
                 <textarea 
-                    ngModel
+                    [ngModel]="editMode ? editedEvent.description : ''"
                     rows="3"
                     name="description"
                     required
@@ -27,7 +27,7 @@
                 <input 
                     appInput 
                     type="date"
-                    ngModel
+                    [ngModel]="editMode ? editedEvent.date : ''"
                     name="date"
                     required
                 >
@@ -37,7 +37,7 @@
                 <input 
                     appInput
                     type="text"
-                    ngModel
+                    [ngModel]="editMode ? editedEvent.place : ''"
                     name="place"
                     required
                 >
@@ -47,7 +47,7 @@
                 <input 
                     appInput 
                     type="number"
-                    ngModel
+                    [ngModel]="editMode ? editedEvent.membersAmount : ''"
                     name="membersAmount"
                     required
                     min="2"
@@ -58,7 +58,7 @@
                 <select
                     appInput
                     name="access"
-                    ngModel
+                    [ngModel]="editMode ? editedEvent.access : ''"
                     required
                 >
                     <option>Publiczne</option>

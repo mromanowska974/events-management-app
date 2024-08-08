@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { addDoc, collection, Firestore, getDocs, where } from '@angular/fire/firestore';
+import { addDoc, collection, doc, Firestore, getDocs, updateDoc, where } from '@angular/fire/firestore';
 import { query } from 'firebase/firestore';
 
 @Injectable({
@@ -23,21 +23,59 @@ export class EventService {
     })
   }
 
+  editEvent(event: any, eid: string){
+    const eventRef = doc(this.firestore, `events/${eid}`)
+
+    return updateDoc(eventRef, event)
+  }
+
   getEventsByOwnerId(uid: string){
     const ownerQuery = query(this.collectionRef, where('ownerId', '==', uid))
 
-    return getDocs(ownerQuery).then(data => data.docs.map(doc => doc.data()))
+    return getDocs(ownerQuery).then(data => data.docs.map(doc => {
+      return {
+        id: doc.id,
+        name: doc.data()['name'],
+        date: doc.data()['date'],
+        place: doc.data()['place'],
+        description: doc.data()['description'],
+        access: doc.data()['access'],
+        membersAmount: doc.data()['membersAmount']
+      }
+    }))
   }
 
   getEventsByMemberId(uid: string){
     const memberQuery = query(this.collectionRef, where('members', 'array-contains', uid))
 
-    return getDocs(memberQuery).then(data => data.docs.map(doc => doc.data()))
+    return getDocs(memberQuery).then(data => data.docs.map(doc => {
+      return {
+        id: doc.id,
+        name: doc.data()['name'],
+        date: doc.data()['date'],
+        place: doc.data()['place'],
+        description: doc.data()['description'],
+        access: doc.data()['access'],
+        membersAmount: doc.data()['membersAmount']
+      }
+    }))
   }
 
   getPublicEvents(){
     const accessQuery = query(this.collectionRef, where('access', '==', 'Publiczne'))
 
-    return getDocs(accessQuery).then(data => data.docs.map(doc => doc.data()))
+    return getDocs(accessQuery).then(data => data.docs.map(doc => {
+      return {
+        id: doc.id,
+        name: doc.data()['name'],
+        date: doc.data()['date'],
+        place: doc.data()['place'],
+        description: doc.data()['description'],
+        access: doc.data()['access'],
+        membersAmount: doc.data()['membersAmount'],
+        ownerId: doc.data()['ownerId'],
+        members: doc.data()['members']
+      }
+    }))
   }
 }
