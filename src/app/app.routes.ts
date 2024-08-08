@@ -4,6 +4,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { AddEventComponent } from './add-event/add-event.component';
 import { UserPanelComponent } from './user-panel/user-panel.component';
 import { PageContainerComponent } from './page-container/page-container.component';
+import { EventDetailsComponent } from './event-details/event-details.component';
 
 export const routes: Routes = [
     {
@@ -24,6 +25,9 @@ export const routes: Routes = [
             },
             {
                 path: 'user-panel', component: UserPanelComponent
+            },
+            {
+                path: 'details', component: EventDetailsComponent
             }
         ]
     },

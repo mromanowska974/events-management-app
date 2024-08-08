@@ -23,7 +23,6 @@ export class NavbarComponent implements OnInit{
 
   ngOnInit(): void {
     this.navigationService.activePage.subscribe(page => {
-      console.log(this.activePage)
       this.activePage = page
     })
   }

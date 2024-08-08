@@ -1,0 +1,67 @@
+<div class="container" appContainer>
+    <div class="widget" appWidget>
+        <h1>{{ event.name }}</h1>
+        <div class="content">
+            <div class="left-box">
+                <p>{{ event.date }}</p>
+                <p>{{ event.place }}</p>
+                <p>{{ event.access }}</p>
+                <p>
+                    {{ 
+                        event.members.length+1 +'/'+ event.membersAmount
+                    }} {{ 
+                        (event.membersAmount%10 >= 2 && event.membersAmount%10 <= 4) && (event.membersAmount%100 < 12 || event.membersAmount%100 > 14) ? ' osoby' : ' osób'
+                    }}
+                </p>
+            </div>
+            <div class="right-box">
+                <div class="description">
+                    <p>{{ event.description }}</p>
+                </div>
+                <div class="members-list">
+                    <p>Członkowie:</p>
+                    <div class="scroll">
+                        <div class="member">
+                            <p>UserName</p>
+                            <div class="member-btn-box">
+                                <button>Czat</button>
+                                <button>Usuń</button>
+                            </div>
+                        </div>
+                        <div class="member">
+                            <p>UserName</p>
+                            <div class="member-btn-box">
+                                <button>Czat</button>
+                                <button>Usuń</button>
+                            </div>
+                        </div>
+                        <div class="member">
+                            <p>UserName</p>
+                            <div class="member-btn-box">
+                                <button>Czat</button>
+                                <button>Usuń</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-box">
+                    <button appButton *ngIf="event.ownerId !== uid && !event.members.includes(uid)">
+                        Poproś o dołączenie
+                    </button>
+                    <button appButton *ngIf="event.ownerId !== uid && event.members.includes(uid)">
+                        Opuść wydarzenie
+                    </button>
+                    <button appButton *ngIf="event.ownerId === uid">
+                        Zaproś uzytkownika
+                    </button>
+                    <button appButton *ngIf="event.ownerId === uid">
+                        Modyfikuj wydarzenie
+                    </button>
+                    <button appButton *ngIf="event.ownerId === uid">
+                        Usuń wydarzenie
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { WidgetDirective } from '../directives/widget.directive';
 import { ButtonDirective } from '../directives/button.directive';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-card',
@@ -13,5 +14,12 @@ import { ButtonDirective } from '../directives/button.directive';
   styleUrl: './event-card.component.css'
 })
 export class EventCardComponent {
+  router = inject(Router);
+
   @Input() event: any;
+
+  onOpenDetails(){
+    localStorage.setItem('event', JSON.stringify(this.event))
+    this.router.navigate(['page', 'details'])
+  }
 }
