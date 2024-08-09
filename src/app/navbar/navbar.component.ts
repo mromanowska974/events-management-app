@@ -25,13 +25,12 @@ export class NavbarComponent implements OnInit{
 
   activePage: string = '';
   searchPhrase: string = '';
+  searchPeriod: Date[] = [];
 
   ngOnInit(): void {
     this.navigationService.activePage.subscribe(page => {
       this.activePage = page
     })
-
-    console.log(this.searchPhrase)
   }
 
   onLogout(){
@@ -45,7 +44,10 @@ export class NavbarComponent implements OnInit{
   }
 
   onChangePhrase(){
-    console.log(this.searchPhrase)
     this.searchService.setSearchPhrase(this.searchPhrase);
+  }
+
+  onChangePeriod(){
+    this.searchService.setSearchPeriod(this.searchPeriod);
   }
 }

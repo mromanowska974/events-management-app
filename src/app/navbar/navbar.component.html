@@ -16,11 +16,17 @@
                 <label>Od</label>
                 <input 
                     type="date" 
+                    [(ngModel)]="searchPeriod[0]"
+                    (ngModelChange)="onChangePeriod()"
                 >
             </div>
             <div class="input-box">
                 <label>Do</label>
-                <input type="date">
+                <input 
+                    type="date"
+                    [(ngModel)]="searchPeriod[1]"
+                    (ngModelChange)="onChangePeriod()"
+                >
             </div>
         </div>
     </div>

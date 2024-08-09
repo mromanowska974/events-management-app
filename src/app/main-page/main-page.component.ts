@@ -8,6 +8,7 @@ import { NavigationService } from '../services/navigation.service';
 import { CommonModule } from '@angular/common';
 import { EventService } from '../services/event.service';
 import { SearchService } from '../services/search.service';
+import { Event } from '../models/event';
 
 @Component({
   selector: 'app-main-page',
@@ -31,8 +32,8 @@ export class MainPageComponent implements OnInit{
   searchService = inject(SearchService);
   cd = inject(ChangeDetectorRef);
 
-  publicEvents: any[] = [];
-  eventsList: any[] = [];
+  publicEvents: Event[] = [];
+  eventsList: Event[] = [];
   
   ngOnInit(): void {
     this.userService.activeUser.subscribe(user => {
@@ -47,6 +48,14 @@ export class MainPageComponent implements OnInit{
       this.searchService.searchPhrase.subscribe(phrase => {
         this.eventsList = this.publicEvents.slice();
         this.eventsList = this.eventsList.filter(event => event.name.includes(phrase));
+      })
+
+      this.searchService.searchPeriod.subscribe(timeRange => {
+        this.eventsList = this.publicEvents.slice();
+
+        if(timeRange[0] && timeRange[1]) this.eventsList = this.eventsList.filter(event => event.date > timeRange[0] && event.date < timeRange[1]);
+        else if(!timeRange[0] && timeRange[1]) this.eventsList = this.eventsList.filter(event => event.date < timeRange[1]);
+        else if(timeRange[0] && !timeRange[1]) this.eventsList = this.eventsList.filter(event => event.date > timeRange[0])
       })
     })
   }
