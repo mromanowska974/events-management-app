@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from "../navbar/navbar.component";
+import { MainPageComponent } from '../main-page/main-page.component';
 
 @Component({
   selector: 'app-page-container',
@@ -13,5 +14,5 @@ import { NavbarComponent } from "../navbar/navbar.component";
   styleUrl: './page-container.component.css'
 })
 export class PageContainerComponent{
-  
+  phrase: string = '';
 }

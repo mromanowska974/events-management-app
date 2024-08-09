@@ -2,7 +2,28 @@
     <a *ngIf="activePage !== 'main-page'" [routerLink]="['main-page']">
         Wróć do strony głównej
     </a>
-    <input *ngIf="activePage === 'main-page'" appInput placeholder="Wyszukaj wydarzenie...">
+    <div class="search-panel">
+        <input 
+            class="search-bar" 
+            *ngIf="activePage === 'main-page'" 
+            appInput 
+            placeholder="Wyszukaj wydarzenie..."
+            [(ngModel)]="searchPhrase"
+            (ngModelChange)="onChangePhrase()"
+        >
+        <div class="search-by-date">
+            <div class="input-box">
+                <label>Od</label>
+                <input 
+                    type="date" 
+                >
+            </div>
+            <div class="input-box">
+                <label>Do</label>
+                <input type="date">
+            </div>
+        </div>
+    </div>
     <div class="btn-box">
         <button>
             <img src="../../assets/icons/chat-icon.svg">

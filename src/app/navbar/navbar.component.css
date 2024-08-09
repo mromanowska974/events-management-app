@@ -5,8 +5,8 @@
     width: 100vw;
 }
 
-input {
-    width: 50vw;
+.search-bar {
+    width: 20vw;
     height: 50%;
     margin: 15px;
 }
@@ -37,7 +37,29 @@ a {
     width: 80%;
 }
 
+.search-panel {
+    display: flex;
+}
 
+.search-by-date {
+    display: flex;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    color: white;
+    font-family: 'PTSans';
+    font-size: 10px;
+}
+
+.input-box input {
+    background-color: var(--darkRed);
+    color: white;
+    border: none;
+    font-size: 10px;
+}
 
 @media (orientation: landscape) {
     .container{
