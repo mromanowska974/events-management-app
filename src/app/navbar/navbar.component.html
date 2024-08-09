@@ -2,10 +2,9 @@
     <a *ngIf="activePage !== 'main-page'" [routerLink]="['main-page']">
         Wróć do strony głównej
     </a>
-    <div class="search-panel">
+    <div class="search-panel" *ngIf="activePage === 'main-page'" >
         <input 
             class="search-bar" 
-            *ngIf="activePage === 'main-page'" 
             appInput 
             placeholder="Wyszukaj wydarzenie..."
             [(ngModel)]="searchPhrase"
@@ -43,7 +42,7 @@
         <button *ngIf="activePage !== 'user-panel'" (click)="onUserPanel()">
             <img src="../../assets/icons/user-icon.svg">
         </button>
-        <button>
+        <button *ngIf="activePage !== 'calendar'" (click)="onCalendarPage()">
             <img src="../../assets/icons/calendar-icon.svg">
         </button>
         <button (click)="onLogout()">

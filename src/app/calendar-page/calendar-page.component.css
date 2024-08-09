@@ -1,0 +1,41 @@
+.container {
+    justify-content: center;
+    align-items: center;
+}
+
+.widget {
+    width: 80%;
+    height: 80%;
+    display: flex;
+}
+
+.box {
+    width: 45%;
+    margin: 0 2.5%;
+}
+
+.event {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.event p, h3 {
+    margin: 0;
+}
+
+.events-list {
+    overflow-y: auto;
+    height: 20%;
+}
+
+@media (orientation: portrait) {
+    .widget {
+        flex-direction: column;
+    }
+
+    .box {
+        width: 95%;
+    }
+}

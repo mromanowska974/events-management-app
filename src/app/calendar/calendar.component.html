@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="calendar-headline">
+        <div class="calendar-headline-controls">
+            <div class="calendar-headline-control" (click)="onMonthBack()"> << </div>
+            <div class="calendar-headline-control"> 
+                {{activeMonth.monthShort}},
+                {{activeMonth.year}}
+            </div>
+            <div class="calendar-headline-control" (click)="onMonthForward()"> >> </div>
+        </div>
+    </div>
+    <div class="calendar">
+        <div class="calendar-weeks-grid">
+            @for (weekday of weekdays; track $index) {
+                <div class="calendar-weeks-grid-cell">{{ weekday }}</div>
+            }
+        </div>
+        <div class="calendar-grid">
+            @for (dayOfMonth of daysOfMonth; track $index) {
+                <div class="calendar-grid-cell" (click)="onSelectDate(dayOfMonth)">{{ dayOfMonth.day }}</div>
+            }
+        </div>
+    </div>
+</div>

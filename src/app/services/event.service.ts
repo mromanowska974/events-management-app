@@ -40,7 +40,9 @@ export class EventService {
         place: doc.data()['place'],
         description: doc.data()['description'],
         access: doc.data()['access'],
-        membersAmount: doc.data()['membersAmount']
+        membersAmount: doc.data()['membersAmount'],
+        ownerId: doc.data()['ownerId'],
+        members: doc.data()['members']
       }
     }))
   }
@@ -56,7 +58,9 @@ export class EventService {
         place: doc.data()['place'],
         description: doc.data()['description'],
         access: doc.data()['access'],
-        membersAmount: doc.data()['membersAmount']
+        membersAmount: doc.data()['membersAmount'],
+        ownerId: doc.data()['ownerId'],
+        members: doc.data()['members']
       }
     }))
   }

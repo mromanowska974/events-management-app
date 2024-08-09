@@ -1,0 +1,24 @@
+<div class="container" appContainer>
+    <div class="widget" appWidget>
+        <div class="box">
+            <app-calendar (dateReceived)="onDateReceived($event)"></app-calendar>
+        </div>
+        <div class="box">
+            <h1>Wydarzenia w dniu - {{ selectedDate.day +' '+ selectedDate.monthLong + ' ' + selectedDate.year }}:</h1>
+            <h2>Moje:</h2>
+            <div class="events-list">
+                <div class="event" *ngFor="let event of ownedEventsByDate">
+                    <h3>{{ event.name }}</h3>
+                    <p>{{ event.place }}</p>
+                </div>
+            </div>
+            <h2>Uczestniczę w:</h2>
+            <div class="events-list">
+                <div class="event" *ngFor="let event of participatedEventsByDate">
+                    <h3>{{ event.name }}</h3>
+                    <p>{{ event.place }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

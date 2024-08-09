@@ -4,6 +4,7 @@ import { EventCardComponent } from "../event-card/event-card.component";
 import { ContainerDirective } from '../directives/container.directive';
 import { EventService } from '../services/event.service';
 import { CommonModule } from '@angular/common';
+import { Event } from '../models/event';
 
 @Component({
   selector: 'app-user-panel',
@@ -21,19 +22,17 @@ export class UserPanelComponent {
   navigationService = inject(NavigationService);
   eventService = inject(EventService);
 
-  ownedEvents: any[] = [];
-  participatedEvents: any[] = [];
+  ownedEvents: Event[] = [];
+  participatedEvents: Event[] = [];
   
   ngOnInit(): void {
     this.navigationService.setActivePage('user-panel')
 
     this.eventService.getEventsByOwnerId(localStorage.getItem('uid')!).then(events => {
-      console.log(events)
       this.ownedEvents = events;
     })
 
     this.eventService.getEventsByMemberId(localStorage.getItem('uid')!).then(events => {
-      console.log(events)
       this.participatedEvents = events;
     })
   }

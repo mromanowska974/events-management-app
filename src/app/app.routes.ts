@@ -5,6 +5,8 @@ import { AddEventComponent } from './add-event/add-event.component';
 import { UserPanelComponent } from './user-panel/user-panel.component';
 import { PageContainerComponent } from './page-container/page-container.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { CalendarPageComponent } from './calendar-page/calendar-page.component';
 
 export const routes: Routes = [
     {
@@ -31,6 +33,9 @@ export const routes: Routes = [
             },
             {
                 path: 'details', component: EventDetailsComponent
+            },
+            {
+                path: 'calendar', component: CalendarPageComponent
             }
         ]
     },
