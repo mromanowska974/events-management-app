@@ -33,7 +33,7 @@
         <button>
             <img src="../../assets/icons/chat-icon.svg">
         </button>
-        <button>
+        <button *ngIf="activePage !== 'notifications'" (click)="onNotificationPage()">
             <img src="../../assets/icons/notification-icon.svg">
         </button>
         <button *ngIf="activePage === 'user-panel'">

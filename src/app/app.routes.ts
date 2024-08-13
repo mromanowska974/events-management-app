@@ -7,6 +7,7 @@ import { PageContainerComponent } from './page-container/page-container.componen
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarPageComponent } from './calendar-page/calendar-page.component';
+import { NotificationPageComponent } from './notification-page/notification-page.component';
 
 export const routes: Routes = [
     {
@@ -36,6 +37,9 @@ export const routes: Routes = [
             },
             {
                 path: 'calendar', component: CalendarPageComponent
+            },
+            {
+                path: 'notifications', component: NotificationPageComponent
             }
         ]
     },

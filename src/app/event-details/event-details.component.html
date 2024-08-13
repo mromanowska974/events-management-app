@@ -45,19 +45,19 @@
                     </div>
                 </div>
                 <div class="btn-box">
-                    <button appButton *ngIf="event.ownerId !== uid && !event.members.includes(uid)">
+                    <button appButton *ngIf="event.ownerId !== activeUser.uid && !event.members.includes(activeUser.uid)">
                         Poproś o dołączenie
                     </button>
-                    <button appButton *ngIf="event.ownerId !== uid && event.members.includes(uid)">
+                    <button appButton *ngIf="event.ownerId !== activeUser.uid && event.members.includes(activeUser.uid)">
                         Opuść wydarzenie
                     </button>
-                    <button appButton *ngIf="event.ownerId === uid">
+                    <button appButton *ngIf="event.ownerId === activeUser.uid" (click)="onInviteUser(modalRef)">
                         Zaproś uzytkownika
                     </button>
-                    <button appButton *ngIf="event.ownerId === uid" (click)="onEditEvent()">
+                    <button appButton *ngIf="event.ownerId === activeUser.uid" (click)="onEditEvent()">
                         Modyfikuj wydarzenie
                     </button>
-                    <button appButton *ngIf="event.ownerId === uid">
+                    <button appButton *ngIf="event.ownerId === activeUser.uid">
                         Usuń wydarzenie
                     </button>
                 </div>
@@ -65,3 +65,29 @@
         </div>
     </div>
 </div>
+
+<ng-template #modalRef>
+    <div class="modal-container">
+        <div class="modal-search-bar">
+            <input placeholder="Nazwa użytkownika..." [(ngModel)]="searchPhrase" (ngModelChange)="onInputChange()">
+        </div>
+        <div class="modal-content" appWidget>
+            <h3>Wybierz użytkownika, którego chcesz zaprosić do wydarzenia</h3>
+            <p *ngIf="usersList.length === 0">Wyszukiwany użytkownik nie istnieje.</p>
+            <div class="users-list">
+                <div 
+                    class="user-info"  
+                    [ngClass]="[selectedUserIndex === i ? 'active' : '']" 
+                    *ngFor="let user of usersList; let i = index" 
+                    (click)="onSelectUser(user, i)"
+                >
+                    <p>{{ user.nickname }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="btn-box">
+            <button appButton (click)="onSendInvitation()">Wyślij zaproszenie</button>
+            <button appButton (click)="onCloseModal()">Anuluj</button>
+        </div>
+    </div>
+</ng-template>

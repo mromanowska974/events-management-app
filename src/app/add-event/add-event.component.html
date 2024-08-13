@@ -67,7 +67,7 @@
             </div>
         </div>
         <div class="btn-box">
-            <button type="submit" appButton>Dodaj</button>
+            <button type="submit" appButton>{{ editMode ? 'Edytuj' : 'Dodaj' }}</button>
             <button type="button" (click)="onGoBack()" appButton>Anuluj</button>
         </div>
     </form>

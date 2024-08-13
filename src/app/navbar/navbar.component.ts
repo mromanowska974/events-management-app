@@ -48,6 +48,11 @@ export class NavbarComponent implements OnInit{
     this.router.navigate(['page', 'calendar']);
   }
 
+  onNotificationPage(){
+    this.activePage = 'notifications';
+    this.router.navigate(['page', 'notifications'])
+  }
+
   onChangePhrase(){
     this.searchService.setSearchPhrase(this.searchPhrase);
   }

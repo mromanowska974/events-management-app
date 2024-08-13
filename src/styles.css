@@ -6,6 +6,7 @@ body {
 :root {
     --beige: #F9F4EE;
     --darkRed: #A40B02;
+    --darkBeige: rgb(187, 159, 120);
 }
 
 @font-face {

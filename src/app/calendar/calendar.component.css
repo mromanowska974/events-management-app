@@ -60,6 +60,6 @@
 }
   
 .calendar-grid-cell:hover {
-    background: rgb(187, 159, 120);
+    background: var(--darkBeige)
 }
   

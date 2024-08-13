@@ -62,6 +62,53 @@ h1 {
     gap: 15px;
 }
 
+.modal-container {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--beige);
+    border-radius: 10px;
+    height: 100%;
+    font-family: 'PTSans';
+    justify-content: center;
+    gap: 20px;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 70%;
+    align-self: center;
+    padding: 20px;
+}
+
+.modal-content h3 {
+    margin: 0;
+}
+
+.modal-search-bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.modal-search-bar input {
+    border: none;
+    height: 25px;
+    width: 50%;
+    margin-top: 15px;
+    box-shadow: 2px 2px 2px #aaaaaa;
+}
+
+.user-list {
+    overflow-y: auto;
+}
+
+.user-info:hover, .active {
+    background-color: var(--darkBeige);
+    color: white;
+}
+
 @media (orientation: portrait) {
     .content {
         flex-direction: column;
@@ -83,5 +130,13 @@ h1 {
 
     .btn-box {
         flex-wrap: wrap;
+    }
+
+    .modal-search-bar input {
+        width: 80%;
+    }
+
+    .modal-content {
+        width: 70%;
     }
 }
