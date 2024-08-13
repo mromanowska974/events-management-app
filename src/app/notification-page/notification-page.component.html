@@ -1,21 +1,21 @@
 <div class="container" appContainer>
     <h1> Powiadomienia </h1>
     <div class="notifications-list">
-        <div class="notification" appWidget>
-            <h3>Nazwa</h3>
-            <p>blablablablablablablablab</p>
-        </div>
-        <div class="notification" appWidget>
-            <h3>Nazwa</h3>
-            <p>blablablablablablablablab</p>
-        </div>
-        <div class="notification" appWidget>
-            <h3>Nazwa</h3>
-            <p>blablablablablablablablab</p>
-        </div>
-        <div class="notification" appWidget>
-            <h3>Nazwa</h3>
-            <p>blablablablablablablablab</p>
+        <p *ngIf="activeUser.notifications.length === 0">Brak powiadomień.</p>
+        <div 
+            class="notification" 
+            appWidget
+            *ngFor="let notification of activeUser.notifications"
+        >
+            <div class="content">
+                <h3>{{ notification.name }}</h3>
+                <p>{{ notification.content }}</p>
+            </div>
+            <div class="btn-box">
+                <button *ngIf="notification.type === 'invitation'" appButton (click)="onAcceptInvitation(notification.from, notification.id, notification.toEvent)">Przyjmij</button>
+                <button *ngIf="notification.type === 'invitation'" appButton (click)="onDeclineInvitation(notification.from, notification.id)">Odrzuć</button>
+                <button *ngIf="notification.type !== 'invitation'" appButton (click)="onReadNotification(notification.id)">Ok</button>
+            </div>
         </div>
     </div>
 </div>

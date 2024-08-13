@@ -19,7 +19,10 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     if(localStorage.getItem('uid') !== null){
       this.userService.getUser(localStorage.getItem('uid')!).then(user => {
-        this.userService.setActiveUser(user)
+        this.userService.getNotifications(user.uid).then(notifs => {
+          user.notifications = notifs
+          this.userService.setActiveUser(user)
+        })
       })
     }
   }

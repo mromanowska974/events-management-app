@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { collection, doc, Firestore, getDoc, getDocs, query, setDoc, where } from '@angular/fire/firestore';
+import { collection, deleteDoc, doc, Firestore, getDoc, getDocs, query, setDoc, where } from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,8 @@ export class UserService {
   firestore = inject(Firestore)
 
   activeUser = new BehaviorSubject(null);
+
+  //USER
 
   setActiveUser(user: any){
     this.activeUser.next(user)
@@ -23,19 +26,20 @@ export class UserService {
     })
   }
 
-  getUser(uid: string){
+  getUser(uid: string): Promise<User>{
     const docRef = doc(this.firestore, `users/${uid}`);
 
     return getDoc(docRef).then(data => {
       return {
         uid: data.id,
         email: data.data()!['email'],
-        nickname: data.data()!['nickname']
+        nickname: data.data()!['nickname'],
+        notifications: []
       }
     });
   }
 
-  getAllUsers(){
+  getAllUsers(): Promise<User[]>{
     const collectionRef = collection(this.firestore, 'users');
 
     return getDocs(collectionRef).then(data => data.docs.map(user => {
@@ -45,5 +49,28 @@ export class UserService {
         nickname: user.data()['nickname']
       }
     }))
+  }
+
+  //NOTIFICATIONS
+
+  getNotifications(uid){
+    const collectionRef = collection(this.firestore, `users/${uid}/notifications`)
+
+    return getDocs(collectionRef).then(data => data.docs.map(doc => {
+      return {
+        id: doc.id,
+        name: doc.data()['name'],
+        content: doc.data()['content'],
+        type: doc.data()['type'],
+        toEvent: doc.data()['toEvent'] ? doc.data()['toEvent'] : null,
+        from: doc.data()['from']
+      }
+    }))
+  }
+
+  readNotification(id, uid){
+    const docRef = doc(this.firestore, `users/${uid}/notifications/${id}`)
+
+    return deleteDoc(docRef);
   }
 }

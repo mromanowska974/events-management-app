@@ -27,7 +27,10 @@ export class LoginComponent {
   onLogin(email: string, password: string){
     this.loginService.login(email, password).then(data => {
       this.userService.getUser(data.uid).then(user => {
-        this.setActiveUser(data.uid, user); 
+        this.userService.getNotifications(user.uid).then(notifs => {
+          user.notifications = notifs;
+          this.setActiveUser(user);
+        })
       })     
     }).catch(error => {
       console.log(error)
@@ -38,7 +41,7 @@ export class LoginComponent {
     this.loginService.register(email, password).then(data => {
       this.userService.createUser(data.uid, data.email).then(() => {
         this.userService.getUser(data.uid).then(user => {
-          this.setActiveUser(data.uid, user); 
+          this.setActiveUser(user); 
         })   
       })
     }).catch(error => {
@@ -59,25 +62,26 @@ export class LoginComponent {
   }
 
   private handleAlternativeLogin(data: any){
-    console.log(data)
     this.userService.getUser(data.uid).then(user => {
-      console.log(user)
       if(user !== null && user !== undefined){
-        this.setActiveUser(data.uid, user)
+        this.userService.getNotifications(user.uid).then(notifs => {
+          user.notifications = notifs;
+          this.setActiveUser(user);
+        })
       }
       else{
         this.userService.createUser(data.uid, data.email).then(() => {
           this.userService.getUser(data.uid).then(user => {
-            this.setActiveUser(data.uid, user)
+            this.setActiveUser(user);
           })
         })
       }
     })
   }
 
-  private setActiveUser(uid: string, user: any){
-    this.userService.setActiveUser(user)
-    localStorage.setItem('uid', uid)
-    this.router.navigate(['page', 'main-page'])
+  private setActiveUser(user: any){
+    this.userService.setActiveUser(user);
+    localStorage.setItem('uid', user.uid);
+    this.router.navigate(['page', 'main-page']);
   }
 }

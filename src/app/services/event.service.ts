@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { addDoc, collection, doc, Firestore, getDocs, updateDoc, where } from '@angular/fire/firestore';
+import { addDoc, collection, doc, Firestore, getDoc, getDocs, updateDoc, where } from '@angular/fire/firestore';
 import { query } from 'firebase/firestore';
+import { Event } from '../models/event';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class EventService {
   
   collectionRef = collection(this.firestore, 'events');
 
-  createEvent(event: any){
+  createEvent(event: Event){
     return addDoc(this.collectionRef, {
       name: event.name,
       description: event.description,
@@ -23,10 +24,36 @@ export class EventService {
     })
   }
 
-  editEvent(event: any, eid: string){
+  editEvent(event, eid: string){
     const eventRef = doc(this.firestore, `events/${eid}`)
 
     return updateDoc(eventRef, event)
+  }
+
+  addMember(eid: string, members){
+    const eventRef = doc(this.firestore, `events/${eid}`)
+
+    return updateDoc(eventRef, {
+      members: members
+    })
+  }
+
+  getEvent(eid: string): Promise<Event>{
+    const eventRef = doc(this.firestore, `events/${eid}`)
+
+    return getDoc(eventRef).then(data => {
+      return {
+        id: data.id,
+        name: data.data()!['name'],
+        date: data.data()!['date'],
+        description: data.data()!['description'],
+        access: data.data()!['access'],
+        membersAmount: data.data()!['membersAmount'],
+        members: data.data()!['members'],
+        ownerId: data.data()!['ownerId'],
+        place: data.data()!['place'],
+      }
+    })
   }
 
   getEventsByOwnerId(uid: string){

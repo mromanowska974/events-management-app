@@ -89,7 +89,7 @@ export class EventDetailsComponent implements OnInit, OnDestroy{
   }
   
   onSendInvitation(){
-    this.invitationService.sendInvitation(this.activeUser.nickname, this.event.name, this.selectedUser.uid);
+    this.invitationService.sendInvitation(this.activeUser, this.event, this.selectedUser.uid);
     this.onCloseModal();
   }
 }
