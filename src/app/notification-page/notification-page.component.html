@@ -12,9 +12,9 @@
                 <p>{{ notification.content }}</p>
             </div>
             <div class="btn-box">
-                <button *ngIf="notification.type === 'invitation'" appButton (click)="onAcceptInvitation(notification.from, notification.id, notification.toEvent)">Przyjmij</button>
-                <button *ngIf="notification.type === 'invitation'" appButton (click)="onDeclineInvitation(notification.from, notification.id)">Odrzuć</button>
-                <button *ngIf="notification.type !== 'invitation'" appButton (click)="onReadNotification(notification.id)">Ok</button>
+                <button *ngIf="notification.type === 'invitation' || notification.type === 'request'" appButton (click)="onAcceptNotification(notification.from, notification.id, notification.toEvent, notification.type)">Przyjmij</button>
+                <button *ngIf="notification.type === 'invitation' || notification.type === 'request'" appButton (click)="onDeclineNotification(notification.from, notification.id, notification.type)">Odrzuć</button>
+                <button *ngIf="notification.type !== 'invitation' && notification.type !== 'request'" appButton (click)="onReadNotification(notification.id)">Ok</button>
             </div>
         </div>
     </div>

@@ -12,6 +12,7 @@ import { UserService } from '../services/user.service';
 import { FormsModule } from '@angular/forms';
 import { InvitationService } from '../services/invitation.service';
 import { Subscription } from 'rxjs';
+import { RequestService } from '../services/request.service';
 
 @Component({
   selector: 'app-event-details',
@@ -34,6 +35,7 @@ export class EventDetailsComponent implements OnInit, OnDestroy{
   modalService = inject(ModalService);
   userService = inject(UserService);
   invitationService = inject(InvitationService);
+  requestService = inject(RequestService);
   router = inject(Router);
 
   sub: Subscription;
@@ -91,5 +93,10 @@ export class EventDetailsComponent implements OnInit, OnDestroy{
   onSendInvitation(){
     this.invitationService.sendInvitation(this.activeUser, this.event, this.selectedUser.uid);
     this.onCloseModal();
+  }
+
+  onSendRequest(){
+    this.requestService.sendRequest(this.activeUser, this.event);
+    alert('Prośba o dołączenie została wysłana.');
   }
 }

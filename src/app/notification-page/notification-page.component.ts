@@ -9,6 +9,7 @@ import { ButtonDirective } from '../directives/button.directive';
 import { InvitationService } from '../services/invitation.service';
 import { Subscription } from 'rxjs';
 import { EventService } from '../services/event.service';
+import { RequestService } from '../services/request.service';
 
 @Component({
   selector: 'app-notification-page',
@@ -27,6 +28,7 @@ export class NotificationPageComponent implements OnInit, OnDestroy{
   navigationService = inject(NavigationService);
   userService = inject(UserService);
   invitationService = inject(InvitationService);
+  requestService = inject(RequestService);
   eventService = inject(EventService);
 
   activeUser: User;
@@ -49,23 +51,35 @@ export class NotificationPageComponent implements OnInit, OnDestroy{
       }
   }
 
-  onAcceptInvitation(uid, notifId, eid){
-    this.invitationService.acceptInvitation(this.activeUser, uid);
-
+  onAcceptNotification(uid, notifId, eid, type){
+    if(type === 'invitation'){
+      this.invitationService.acceptInvitation(this.activeUser, uid);
+    }
+    else if(type === 'request') {
+      this.requestService.acceptRequest(this.activeUser, uid);
+    }
+    
     this.eventService.getEvent(eid).then(event => {
       console.log(event)
-      event.members.push(this.activeUser.uid);
+      if(type === 'invitation'){
+        event.members.push(this.activeUser.uid);
+      }
+      else if(type === 'request'){
+        event.members.push(uid);
+      }
       this.eventService.addMember(eid, event.members);
     })
-
 
     this.onReadNotification(notifId);
   }
 
-  onDeclineInvitation(uid, notifId){
-    this.invitationService.declineInvitation(this.activeUser, uid);
-    this.userService.readNotification(notifId, this.activeUser.uid);
-
+  onDeclineNotification(uid, notifId, type){
+    if(type === 'invitation'){
+      this.invitationService.declineInvitation(this.activeUser, uid);
+    }
+    else if(type === 'request'){
+      this.requestService.declineRequest(this.activeUser, uid);
+    }
     this.onReadNotification(notifId);
   }
 
