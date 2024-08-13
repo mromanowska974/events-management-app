@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { collection, deleteDoc, doc, Firestore, getDoc, getDocs, query, setDoc, where } from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../models/user';
+import { addDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -66,6 +67,17 @@ export class UserService {
         from: doc.data()['from']
       }
     }))
+  }
+
+  sendLeavingNotification(fromUser, toUid, eventName){
+    const collectionRef = collection(this.firestore, `users/${toUid}/notifications`)
+
+    return addDoc(collectionRef, {
+      name: 'Opuszczono wydarzenie',
+      content: 'Użytkownik '+fromUser.nickname+' opuścił wydarzenie: '+eventName,
+      type: 'user-left',
+      from: fromUser.uid
+    })
   }
 
   readNotification(id, uid){

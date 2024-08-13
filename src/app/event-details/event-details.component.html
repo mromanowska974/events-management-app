@@ -48,7 +48,7 @@
                     <button appButton *ngIf="event.ownerId !== activeUser.uid && !event.members.includes(activeUser.uid)" (click)="onSendRequest()">
                         Poproś o dołączenie
                     </button>
-                    <button appButton *ngIf="event.ownerId !== activeUser.uid && event.members.includes(activeUser.uid)">
+                    <button appButton *ngIf="event.ownerId !== activeUser.uid && event.members.includes(activeUser.uid)" (click)="onLeaveEvent()">
                         Opuść wydarzenie
                     </button>
                     <button appButton *ngIf="event.ownerId === activeUser.uid" (click)="onInviteUser(modalRef)">

@@ -67,7 +67,7 @@ export class NotificationPageComponent implements OnInit, OnDestroy{
       else if(type === 'request'){
         event.members.push(uid);
       }
-      this.eventService.addMember(eid, event.members);
+      this.eventService.modifyMembersList(eid, event.members);
     })
 
     this.onReadNotification(notifId);

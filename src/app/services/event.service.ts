@@ -30,7 +30,7 @@ export class EventService {
     return updateDoc(eventRef, event)
   }
 
-  addMember(eid: string, members){
+  modifyMembersList(eid: string, members){
     const eventRef = doc(this.firestore, `events/${eid}`)
 
     return updateDoc(eventRef, {
