@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { NavigationService } from '../services/navigation.service';
 import { ContainerDirective } from '../directives/container.directive';
 import { WidgetDirective } from '../directives/widget.directive';
@@ -14,6 +14,7 @@ import { InvitationService } from '../services/invitation.service';
 import { Subscription } from 'rxjs';
 import { RequestService } from '../services/request.service';
 import { EventService } from '../services/event.service';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-event-details',
@@ -39,8 +40,9 @@ export class EventDetailsComponent implements OnInit, OnDestroy{
   requestService = inject(RequestService);
   router = inject(Router);
   eventService = inject(EventService);
+  notificationService = inject(NotificationService);
 
-  sub: Subscription;
+  activeUserSub: Subscription;
 
   event: Event;
   activeUser: User;
@@ -49,23 +51,32 @@ export class EventDetailsComponent implements OnInit, OnDestroy{
   searchPhrase: string;
   selectedUserIndex: number;
   selectedUser: User;
+  members: User[] = [];
 
   ngOnInit(): void {
       this.navigationService.setActivePage('details');
-      this.event = JSON.parse(localStorage.getItem('event')!);
+      this.eventService.getEvent(localStorage.getItem('eventId')!).then(event => {
+        this.event = event;
 
-      this.sub = this.userService.activeUser.subscribe(user => {
+        this.event.members.forEach(memberId => {
+          this.userService.getUser(memberId).then(user => {
+            this.members.push(user);
+          })
+        });
+      })
+
+      this.activeUserSub = this.userService.activeUser.subscribe(user => {
         this.activeUser = user!
         this.userService.getAllUsers().then(users => {
           this.allUsers = users.filter(user => user.uid !== this.activeUser.uid);
           this.usersList = this.allUsers.slice();
         })
-      })      
+      })        
   }
 
   ngOnDestroy(): void {
-      if(this.sub){
-        this.sub.unsubscribe();
+      if(this.activeUserSub){
+        this.activeUserSub.unsubscribe();
       }
   }
 
@@ -105,8 +116,20 @@ export class EventDetailsComponent implements OnInit, OnDestroy{
   onLeaveEvent(){
     let members = this.event.members.filter(member => member !== this.activeUser.uid);
     this.eventService.modifyMembersList(this.event.id, members).then(() => {
-      this.userService.sendLeavingNotification(this.activeUser, this.event.ownerId, this.event.name);
+      this.notificationService.sendLeavingNotification(this.activeUser, this.event.ownerId, this.event.name);
       this.router.navigate(['page', 'main-page'])
     })
+  }
+
+  onRemoveMember(memberId){
+    let isSure = confirm('Czy na pewno chcesz usunąć wybranego użytkownika z wydarzenia?');
+
+    if(isSure){
+      let members = this.event.members.filter(member => member !== memberId);
+      this.eventService.modifyMembersList(this.event.id, members).then(() => {
+        this.notificationService.sendRemovingNotification(this.activeUser, memberId, this.event.name);
+        window.location.reload()
+      })
+    }
   }
 }

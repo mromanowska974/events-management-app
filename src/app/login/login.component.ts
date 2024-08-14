@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
 import { UserService } from '../services/user.service';
 import { ContainerDirective } from '../directives/container.directive';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -23,11 +24,12 @@ export class LoginComponent {
   router = inject(Router);
   loginService = inject(LoginService);
   userService = inject(UserService);
+  notificationService = inject(NotificationService);
 
   onLogin(email: string, password: string){
     this.loginService.login(email, password).then(data => {
       this.userService.getUser(data.uid).then(user => {
-        this.userService.getNotifications(user.uid).then(notifs => {
+        this.notificationService.getNotifications(user.uid).then(notifs => {
           user.notifications = notifs;
           this.setActiveUser(user);
         })
@@ -64,7 +66,7 @@ export class LoginComponent {
   private handleAlternativeLogin(data: any){
     this.userService.getUser(data.uid).then(user => {
       if(user !== null && user !== undefined){
-        this.userService.getNotifications(user.uid).then(notifs => {
+        this.notificationService.getNotifications(user.uid).then(notifs => {
           user.notifications = notifs;
           this.setActiveUser(user);
         })

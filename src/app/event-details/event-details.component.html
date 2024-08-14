@@ -21,25 +21,12 @@
                 <div class="members-list">
                     <p>Członkowie:</p>
                     <div class="scroll">
-                        <div class="member">
-                            <p>UserName</p>
+                        <p *ngIf="members.length === 0">Brak członków wydarzenia.</p>
+                        <div class="member" *ngFor="let member of members">
+                            <p>{{ member.nickname }}</p>
                             <div class="member-btn-box">
-                                <button>Czat</button>
-                                <button>Usuń</button>
-                            </div>
-                        </div>
-                        <div class="member">
-                            <p>UserName</p>
-                            <div class="member-btn-box">
-                                <button>Czat</button>
-                                <button>Usuń</button>
-                            </div>
-                        </div>
-                        <div class="member">
-                            <p>UserName</p>
-                            <div class="member-btn-box">
-                                <button>Czat</button>
-                                <button>Usuń</button>
+                                <button appButton>Czat</button>
+                                <button appButton (click)="onRemoveMember(member.uid)">Usuń</button>
                             </div>
                         </div>
                     </div>

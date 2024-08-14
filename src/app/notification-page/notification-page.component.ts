@@ -10,6 +10,7 @@ import { InvitationService } from '../services/invitation.service';
 import { Subscription } from 'rxjs';
 import { EventService } from '../services/event.service';
 import { RequestService } from '../services/request.service';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-notification-page',
@@ -30,6 +31,7 @@ export class NotificationPageComponent implements OnInit, OnDestroy{
   invitationService = inject(InvitationService);
   requestService = inject(RequestService);
   eventService = inject(EventService);
+  notificationService = inject(NotificationService);
 
   activeUser: User;
 
@@ -85,7 +87,7 @@ export class NotificationPageComponent implements OnInit, OnDestroy{
 
   onReadNotification(id){
     let notifications = this.activeUser.notifications.filter(notif => notif.id !== id);
-    this.userService.readNotification(id, this.activeUser.uid);
+    this.notificationService.readNotification(id, this.activeUser.uid);
     this.userService.setActiveUser({
       ...this.activeUser,
       notifications: notifications
