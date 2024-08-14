@@ -31,6 +31,7 @@ export class AddEventComponent implements OnInit{
   errorMsg = '';
   editMode: boolean = false;
   editedEvent: any;
+  today = new Date().toDateString();
 
   ngOnInit(): void {
       if(this.router.url === '/edit-event'){

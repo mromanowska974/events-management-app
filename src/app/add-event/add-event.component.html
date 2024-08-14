@@ -30,6 +30,7 @@
                     [ngModel]="editMode ? editedEvent.date : ''"
                     name="date"
                     required
+                    [min]="today"
                 >
             </div>
             <div class="input-box">
