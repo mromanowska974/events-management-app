@@ -37,7 +37,9 @@ export class AddEventComponent implements OnInit{
   ngOnInit(): void {
       if(this.router.url === '/edit-event'){
         this.editMode = true;
-        this.editedEvent = JSON.parse(localStorage.getItem('event')!);
+        this.eventService.getEvent(localStorage.getItem('eventId')!).then(event => {
+          this.editedEvent = event;
+        });
       }
 
       this.today = this.formatDate();
