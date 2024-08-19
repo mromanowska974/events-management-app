@@ -36,10 +36,6 @@ export class MainPageComponent implements OnInit{
   eventsList: Event[] = [];
   
   ngOnInit(): void {
-    this.userService.activeUser.subscribe(user => {
-      console.log(user)
-    })
-
     this.navigationService.setActivePage('main-page');
 
     this.eventService.getPublicEvents().then(events => {

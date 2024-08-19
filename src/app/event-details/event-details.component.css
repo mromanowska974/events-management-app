@@ -10,14 +10,18 @@
     height: 90%;
 }
 
-h1 {
-    margin-left: 3%;
-}
-
 .content {
     display: flex;
     justify-content: space-between;
     height: 100%;
+}
+
+.header {
+    padding-left: 3%;
+}
+
+h1, h3 {
+    margin: 5px 0;
 }
 
 .left-box {
@@ -34,8 +38,10 @@ h1 {
 .member {
     display: flex;
     justify-content: space-between;
+    margin: 5px 0;
     width: 70%;
     height: 30px;
+    border-bottom: 1px solid var(--darkRed);
 }
 
 .member p {

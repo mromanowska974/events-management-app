@@ -7,11 +7,9 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class UserService {
-  firestore = inject(Firestore)
+  private firestore = inject(Firestore)
 
   activeUser = new BehaviorSubject(null);
-
-  //USER
 
   setActiveUser(user: any){
     this.activeUser.next(user)

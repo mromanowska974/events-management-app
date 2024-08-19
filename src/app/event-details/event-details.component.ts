@@ -52,6 +52,8 @@ export class EventDetailsComponent implements OnInit, OnDestroy{
   selectedUserIndex: number;
   selectedUser: User;
   members: User[] = [];
+  owner: User;
+  errorMsg: string = '';
 
   ngOnInit(): void {
       this.navigationService.setActivePage('details');
@@ -63,6 +65,10 @@ export class EventDetailsComponent implements OnInit, OnDestroy{
             this.members.push(user);
           })
         });
+
+        this.userService.getUser(event.ownerId).then(user => {
+          this.owner = user;
+        })
       })
 
       this.activeUserSub = this.userService.activeUser.subscribe(user => {
@@ -104,8 +110,13 @@ export class EventDetailsComponent implements OnInit, OnDestroy{
   }
   
   onSendInvitation(){
-    this.invitationService.sendInvitation(this.activeUser, this.event, this.selectedUser.uid);
-    this.onCloseModal();
+    if(this.selectedUser !== undefined){
+      this.invitationService.sendInvitation(this.activeUser, this.event, this.selectedUser.uid);
+      this.onCloseModal();
+    }
+    else {
+      this.errorMsg = 'Proszę wybrać użytkownika.'
+    }
   }
 
   onSendRequest(){
@@ -129,6 +140,19 @@ export class EventDetailsComponent implements OnInit, OnDestroy{
       this.eventService.modifyMembersList(this.event.id, members).then(() => {
         this.notificationService.sendRemovingNotification(this.activeUser, memberId, this.event.name);
         window.location.reload()
+      })
+    }
+  }
+
+  onDeleteEvent(){
+    let isSure = confirm('Czy na pewno chcesz usunąć wydarzenie? Wszystkie dane zostaną utracone.');
+
+    if(isSure){
+      this.eventService.deleteEvent(this.event.id).then(() => {
+        this.event.members.forEach(member => {
+          this.notificationService.sendDeletedEventNotification(this.activeUser, member, this.event.name);
+          this.router.navigate(['page', 'main-page']);
+        })
       })
     }
   }

@@ -7,7 +7,7 @@ import { Event } from '../models/event';
   providedIn: 'root'
 })
 export class InvitationService {
-  firestore = inject(Firestore);
+  private firestore = inject(Firestore);
 
   sendInvitation(user: User, event: Event, selectedUserId){
     const notifictaionsRef = collection(this.firestore, `users/${selectedUserId}/notifications`);

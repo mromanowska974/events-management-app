@@ -6,7 +6,7 @@ import { addDoc, collection, deleteDoc, doc, getDocs } from 'firebase/firestore'
   providedIn: 'root'
 })
 export class NotificationService {
-  firestore = inject(Firestore);
+  private firestore = inject(Firestore);
 
     getNotifications(uid){
       const collectionRef = collection(this.firestore, `users/${uid}/notifications`)
@@ -41,6 +41,17 @@ export class NotificationService {
         name: 'Usunięto Cię z wydarzenia',
         content: 'Użytkownik '+fromUser.nickname+' usunął Cię z wydarzenia: '+eventName,
         type: 'user-removed',
+        from: fromUser.uid
+      })
+    }
+
+    sendDeletedEventNotification(fromUser, toUid, eventName){
+      const collectionRef = collection(this.firestore, `users/${toUid}/notifications`)
+  
+      return addDoc(collectionRef, {
+        name: 'Usunięto wydarzenie',
+        content: 'Użytkownik '+fromUser.nickname+' usunął wydarzenie: '+eventName,
+        type: 'event-deleted',
         from: fromUser.uid
       })
     }

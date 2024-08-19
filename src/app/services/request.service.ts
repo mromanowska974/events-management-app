@@ -7,7 +7,7 @@ import { Event } from '../models/event';
   providedIn: 'root'
 })
 export class RequestService {
-  firestore = inject(Firestore);
+  private firestore = inject(Firestore);
 
   sendRequest(user: User, event: Event){
     const notifictaionsRef = collection(this.firestore, `users/${event.ownerId}/notifications`);

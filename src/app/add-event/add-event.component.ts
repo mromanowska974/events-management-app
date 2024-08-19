@@ -7,6 +7,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule, Location } from '@angular/common';
 import { EventService } from '../services/event.service';
 import { Router } from '@angular/router';
+import { Event } from '../models/event';
 
 @Component({
   selector: 'app-add-event',
@@ -30,8 +31,8 @@ export class AddEventComponent implements OnInit{
 
   errorMsg = '';
   editMode: boolean = false;
-  editedEvent: any;
-  today = new Date().toDateString();
+  editedEvent: Event;
+  today: any = new Date();
 
   ngOnInit(): void {
       if(this.router.url === '/edit-event'){
@@ -39,13 +40,18 @@ export class AddEventComponent implements OnInit{
         this.editedEvent = JSON.parse(localStorage.getItem('event')!);
       }
 
-      console.log(this.editMode)
+      this.today = this.formatDate();
+  }
+
+  private formatDate(){
+    let day = this.today.getDate() < 10 ? '0'+ this.today.getDate() : this.today.getDate();
+    let month = this.today.getMonth() < 10 ? '0'+ (this.today.getMonth()+1) : this.today.getMonth()+1;
+    let year = this.today.getFullYear();
+    return year+'-'+month+'-'+day;
   }
 
   onSubmit(form: NgForm){
     if(form.form.valid){
-      console.log(form.form.value)
-
       if(this.editMode){
         this.editedEvent = {
           ...this.editedEvent,

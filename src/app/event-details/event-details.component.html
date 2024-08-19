@@ -1,6 +1,9 @@
 <div class="container" appContainer>
     <div class="widget" appWidget>
-        <h1>{{ event.name }}</h1>
+        <div class="header">
+            <h1>{{ event.name }}</h1>
+            <h3> Właściciel: {{ owner.nickname }}</h3>
+        </div>
         <div class="content">
             <div class="left-box">
                 <p>{{ event.date }}</p>
@@ -19,14 +22,14 @@
                     <p>{{ event.description }}</p>
                 </div>
                 <div class="members-list">
-                    <p>Członkowie:</p>
+                    <p style="font-weight: bold;">Członkowie:</p>
                     <div class="scroll">
                         <p *ngIf="members.length === 0">Brak członków wydarzenia.</p>
                         <div class="member" *ngFor="let member of members">
-                            <p>{{ member.nickname }}</p>
+                            <p>{{ member.nickname }}<span *ngIf="member.uid === activeUser.uid"> (Ja)</span></p> 
                             <div class="member-btn-box">
-                                <button appButton>Czat</button>
-                                <button appButton (click)="onRemoveMember(member.uid)">Usuń</button>
+                                <button appButton *ngIf="member.uid !== activeUser.uid">Czat</button>
+                                <button appButton *ngIf="event.ownerId === activeUser.uid" (click)="onRemoveMember(member.uid)">Usuń</button>
                             </div>
                         </div>
                     </div>
@@ -44,7 +47,7 @@
                     <button appButton *ngIf="event.ownerId === activeUser.uid" (click)="onEditEvent()">
                         Modyfikuj wydarzenie
                     </button>
-                    <button appButton *ngIf="event.ownerId === activeUser.uid">
+                    <button appButton *ngIf="event.ownerId === activeUser.uid" (click)="onDeleteEvent()">
                         Usuń wydarzenie
                     </button>
                 </div>
@@ -61,6 +64,7 @@
         <div class="modal-content" appWidget>
             <h3>Wybierz użytkownika, którego chcesz zaprosić do wydarzenia</h3>
             <p *ngIf="usersList.length === 0">Wyszukiwany użytkownik nie istnieje.</p>
+            <p *ngIf="errorMsg.length > 0" style="color: red;">{{ errorMsg }}</p>
             <div class="users-list">
                 <div 
                     class="user-info"  

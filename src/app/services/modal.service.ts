@@ -6,8 +6,8 @@ import { ModalComponent } from '../modal/modal.component';
   providedIn: 'root'
 })
 export class ModalService {
-  newModalComponent: ComponentRef<ModalComponent>;
-  injector = inject(EnvironmentInjector)
+  private newModalComponent: ComponentRef<ModalComponent>;
+  private injector = inject(EnvironmentInjector)
 
   dataSub = new BehaviorSubject<any>(null)
 

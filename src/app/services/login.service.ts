@@ -5,7 +5,7 @@ import { Auth, createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthP
   providedIn: 'root'
 })
 export class LoginService {
-  auth = inject(Auth);
+  private auth = inject(Auth);
 
   register(email: string, password: string){
     return createUserWithEmailAndPassword(this.auth, email, password).then(data => data.user)

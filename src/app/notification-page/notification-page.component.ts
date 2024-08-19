@@ -42,8 +42,6 @@ export class NotificationPageComponent implements OnInit, OnDestroy{
 
       this.sub = this.userService.activeUser.subscribe(user => {
         this.activeUser = user!
-
-        console.log(this.activeUser)
       })
   }
 
@@ -62,7 +60,6 @@ export class NotificationPageComponent implements OnInit, OnDestroy{
     }
     
     this.eventService.getEvent(eid).then(event => {
-      console.log(event)
       if(type === 'invitation'){
         event.members.push(this.activeUser.uid);
       }

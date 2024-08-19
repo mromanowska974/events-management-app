@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { addDoc, collection, doc, Firestore, getDoc, getDocs, updateDoc, where } from '@angular/fire/firestore';
+import { addDoc, collection, deleteDoc, doc, Firestore, getDoc, getDocs, updateDoc, where } from '@angular/fire/firestore';
 import { query } from 'firebase/firestore';
 import { Event } from '../models/event';
 
@@ -7,9 +7,9 @@ import { Event } from '../models/event';
   providedIn: 'root'
 })
 export class EventService {
-  firestore = inject(Firestore);
+  private firestore = inject(Firestore);
   
-  collectionRef = collection(this.firestore, 'events');
+  private collectionRef = collection(this.firestore, 'events');
 
   createEvent(event: Event){
     return addDoc(this.collectionRef, {
@@ -108,5 +108,11 @@ export class EventService {
         members: doc.data()['members']
       }
     }))
+  }
+
+  deleteEvent(eid: string){
+    const eventRef = doc(this.firestore, `events/${eid}`)
+
+    return deleteDoc(eventRef);
   }
 }
