@@ -1,5 +1,6 @@
 <div class="container" appContainer>
     <div appWidget class="widget">
+        <p *ngIf="errorMsg.length > 0" style="color: red;">{{ errorMsg }}</p>
         <div class="input-box">
             <label>E-mail</label>
             <input appInput type="email" #email>
@@ -12,6 +13,7 @@
             <button appButton (click)="onLogin(email.value, password.value)">Zaloguj się</button>
             <button appButton (click)="onRegister(email.value, password.value)">Zarejestruj się</button>
         </div>
+        <a class="forgot-password" (click)="onResetPassword(email.value)">Nie pamiętam hasła</a>
         <div class="alternative-login">
             <p>Wybierz inną metodę logowania</p>
             <div class="btn-box">

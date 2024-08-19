@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,10 @@ export class LoginService {
 
   logout(){
     return signOut(this.auth)
+  }
+
+  resetPassword(email){
+    return sendPasswordResetEmail(this.auth, email)
   }
 
   private alternativeLoginAuth(provider: any){
