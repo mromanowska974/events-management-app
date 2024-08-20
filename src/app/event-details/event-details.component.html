@@ -26,7 +26,10 @@
                     <div class="scroll">
                         <p *ngIf="members.length === 0">Brak członków wydarzenia.</p>
                         <div class="member" *ngFor="let member of members">
-                            <p>{{ member.nickname }}<span *ngIf="member.uid === activeUser.uid"> (Ja)</span></p> 
+                            <div class="user-info">
+                                <img [src]="member.profileImageUrl" width="30px" height="30px">
+                                <p>{{ member.nickname }}<span *ngIf="member.uid === activeUser.uid"> (Ja)</span></p> 
+                            </div>
                             <div class="member-btn-box">
                                 <button appButton *ngIf="member.uid !== activeUser.uid">Czat</button>
                                 <button appButton *ngIf="event.ownerId === activeUser.uid" (click)="onRemoveMember(member.uid)">Usuń</button>
@@ -72,6 +75,7 @@
                     *ngFor="let user of usersList; let i = index" 
                     (click)="onSelectUser(user, i)"
                 >
+                    <img [src]="user.profileImageUrl" width="30px" height="30px">
                     <p>{{ user.nickname }}</p>
                 </div>
             </div>

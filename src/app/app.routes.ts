@@ -5,10 +5,10 @@ import { AddEventComponent } from './add-event/add-event.component';
 import { UserPanelComponent } from './user-panel/user-panel.component';
 import { PageContainerComponent } from './page-container/page-container.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
-import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarPageComponent } from './calendar-page/calendar-page.component';
 import { NotificationPageComponent } from './notification-page/notification-page.component';
 import { loggedAuthGuard, unloggedAuthGuard } from './auth-guard';
+import { SettingsComponent } from './settings/settings.component';
 
 export const routes: Routes = [
     {
@@ -22,6 +22,9 @@ export const routes: Routes = [
     },
     {
         path: 'edit-event', component: AddEventComponent, canActivate: [loggedAuthGuard]
+    },
+    {
+        path: 'settings', component: SettingsComponent, canActivate: [loggedAuthGuard]
     },
     {
         path: 'page', 

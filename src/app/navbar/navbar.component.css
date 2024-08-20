@@ -2,7 +2,7 @@
     display: flex;
     background-color: var(--darkRed);
     height: 8vh;
-    width: 100vw;
+    width: 100%;
 }
 
 .search-bar {
@@ -21,8 +21,15 @@ a {
 
 .btn-box{
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
+    gap: 5px;
     margin: 5px 10px 5px 2vw;
+}
+
+.profile-image {
+    background-color: #dddddd;
+    border-radius: 50%;
+    height: 100%;
 }
 
 .btn-box button {
@@ -61,6 +68,23 @@ a {
     font-size: 10px;
 }
 
+.menu {
+    z-index: 2;
+    width: 150px;
+    height: 80px;
+    position: absolute;
+    right: 15px;
+    top: 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.menu button {
+    border: none;
+    background-color: transparent;
+}
+
 @media (orientation: landscape) {
     .container{
         justify-content: end;
@@ -76,7 +100,37 @@ a {
         justify-content: space-between;
     }
 
+    .search-panel {
+        flex-direction: row-reverse;
+    }
+
+    .search-bar {
+        width: 30vw;
+    }
+
+    .search-by-date {
+        width: 15vw;
+        flex-direction: column;
+        margin: 2px 5px;
+    }
+
+    .input-box {
+        height: 40%;
+        margin: 2px 0;
+    }
+
     .btn-box{
-        width: 50vw;
+        width: 40vw;
+        height: 70%;
+        margin-top: 10px;
+    }
+
+    .btn-box button {
+        height: 100%;
+        width: 25%;
+    }
+
+    .profile-image {
+        height: 60%;
     }
 }

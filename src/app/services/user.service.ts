@@ -1,13 +1,15 @@
 import { inject, Injectable } from '@angular/core';
-import { collection, doc, Firestore, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
-import { BehaviorSubject } from 'rxjs';
+import { collection, doc, Firestore, getDoc, getDocs, setDoc, updateDoc } from '@angular/fire/firestore';
+import { BehaviorSubject, from } from 'rxjs';
 import { User } from '../models/user';
+import { getDownloadURL, ref, Storage } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private firestore = inject(Firestore)
+  private storage = inject(Storage);
 
   activeUser = new BehaviorSubject(null);
 
@@ -15,12 +17,24 @@ export class UserService {
     this.activeUser.next(user)
   }
 
-  createUser(uid: string, userData: any){
+  async createUser(uid: string, email: string){
     const docRef = doc(this.firestore, `users/${uid}`);
+    const storageRef = ref(this.storage, 'images/profiles/user-icon.png')
+
+    const imgUrl = await getDownloadURL(storageRef).then((url): string => url)
 
     return setDoc(docRef, {
-      email: userData,
-      nickname: userData
+      email: email,
+      nickname: email.substring(0, email.indexOf('@')),
+      profileImageUrl: imgUrl
+    })
+  }
+
+  modifyUserData(uid, propToEdit, propValue){
+    const docRef = doc(this.firestore, `users/${uid}`);
+
+    return updateDoc(docRef, {
+      [propToEdit]: propValue
     })
   }
 
@@ -32,7 +46,8 @@ export class UserService {
         uid: data.id,
         email: data.data()!['email'],
         nickname: data.data()!['nickname'],
-        notifications: []
+        notifications: data.data()!['notifications'],
+        profileImageUrl: data.data()!['profileImageUrl']
       }
     });
   }
@@ -44,7 +59,8 @@ export class UserService {
       return {
         uid: user.id,
         email: user.data()['email'],
-        nickname: user.data()['nickname']
+        nickname: user.data()['nickname'],
+        profileImageUrl: user.data()['profileImageUrl']
       }
     }))
   }

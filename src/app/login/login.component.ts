@@ -46,7 +46,7 @@ export class LoginComponent {
 
   onRegister(email: string, password: string){
     this.loginService.register(email, password).then(data => {
-      this.userService.createUser(data.uid, data.email).then(() => {
+      this.userService.createUser(data.uid, data.email!).then(() => {
         this.userService.getUser(data.uid).then(user => {
           this.setActiveUser(user); 
         })   

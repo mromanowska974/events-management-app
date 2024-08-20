@@ -36,17 +36,26 @@
         <button *ngIf="activePage !== 'notifications'" (click)="onNotificationPage()">
             <img src="../../assets/icons/notification-icon.svg">
         </button>
-        <button *ngIf="activePage === 'user-panel'">
-            <img src="../../assets/icons/settings-icon.svg">
-        </button>
-        <button *ngIf="activePage !== 'user-panel'" (click)="onUserPanel()">
-            <img src="../../assets/icons/user-icon.svg">
-        </button>
         <button *ngIf="activePage !== 'calendar'" (click)="onCalendarPage()">
             <img src="../../assets/icons/calendar-icon.svg">
         </button>
-        <button (click)="onLogout()">
-            <img src="../../assets/icons/logout-icon.svg">
+        <button (click)="onDisplayMenu()">
+            <img 
+                class="profile-image"
+                [src]="activeUser.profileImageUrl"
+            >
         </button>
     </div>
+</div>
+
+<div class="menu" *ngIf="isMenuActive" appWidget>
+    <button (click)="onSettingsPanel()">
+        Ustawienia konta
+    </button>
+    <button (click)="onUserPanel()">
+        Moje wydarzenia
+    </button>
+    <button (click)="onLogout()">
+        Wyloguj się
+    </button>
 </div>

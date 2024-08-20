@@ -95,6 +95,7 @@ export class EventDetailsComponent implements OnInit, OnDestroy{
   }
 
   onCloseModal(){
+    this.errorMsg = '';
     this.modalService.closeModal(this.modalRef);
   }
 

@@ -1,0 +1,11 @@
+<div appContainer class="container">
+    <div appWidget class="widget">
+        <h1 class="username">Username</h1>
+        <label>Zmień zdjęcie profilowe</label>
+        <input type="file" (change)="onUploadFile($event)">
+        <img [src]="profileImgUrl" width="50px">
+        <a>Zmień nazwę użytkownika</a>
+        <a>Zmień adres e-mail</a>
+        <a>Zmień hasło</a>
+    </div>
+</div>

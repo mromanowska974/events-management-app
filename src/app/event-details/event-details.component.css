@@ -111,13 +111,23 @@ h1, h3 {
     box-shadow: 2px 2px 2px #aaaaaa;
 }
 
-.user-list {
+.users-list {
     overflow-y: auto;
 }
 
 .user-info:hover, .active {
     background-color: var(--darkBeige);
     color: white;
+}
+
+.user-info {
+    display: flex;
+    margin: 10px 0;
+}
+
+.user-info p, .user-info img {
+    align-self: center;
+    margin: 5px;
 }
 
 @media (orientation: portrait) {
