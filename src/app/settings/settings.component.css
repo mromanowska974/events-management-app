@@ -1,0 +1,57 @@
+.container {
+    padding: 20px;
+    align-items: center;
+}
+
+.widget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 60%;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-image img {
+    border-radius: 30%;
+    border: 5px ridge var(--darkRed);
+}
+
+.delete-account {
+    color: var(--darkRed);
+    font-weight: bold;
+}
+
+.option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-box button {
+    border: none;
+    background-color: transparent;
+}
+
+a {
+    cursor: pointer;
+}
+
+@media (orientation: portrait) {
+    .widget {
+        width: 90%;
+    }
+}

@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from '@angular/fire/auth';
+import { Auth, AuthCredential, createUserWithEmailAndPassword, EmailAuthProvider, FacebookAuthProvider, GoogleAuthProvider, reauthenticateWithCredential, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updatePassword } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,15 @@ export class LoginService {
 
   resetPassword(email){
     return sendPasswordResetEmail(this.auth, email)
+  }
+
+  changePassword(oldPassword: string, newPassword: string){
+    const user = this.auth.currentUser;
+    const credential = EmailAuthProvider.credential(user!.email!, oldPassword);
+
+    return reauthenticateWithCredential(user!, credential).then(() => {
+      updatePassword(user!, newPassword);
+    })
   }
 
   private alternativeLoginAuth(provider: any){

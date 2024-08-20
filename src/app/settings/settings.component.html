@@ -1,11 +1,61 @@
 <div appContainer class="container">
     <div appWidget class="widget">
-        <h1 class="username">Username</h1>
-        <label>Zmień zdjęcie profilowe</label>
-        <input type="file" (change)="onUploadFile($event)">
-        <img [src]="profileImgUrl" width="50px">
-        <a>Zmień nazwę użytkownika</a>
-        <a>Zmień adres e-mail</a>
-        <a>Zmień hasło</a>
+        <h1 class="username">{{ activeUser.nickname }}</h1>
+        <div class="options">
+            <div class="profile-image">
+                <img [src]="profileImgUrl" width="300px" height="300px">
+                <input 
+                    type="file" 
+                    (change)="onUploadFile($event)" 
+                    hidden
+                    accept=".jpg, .png"
+                    #upload
+                >
+                <a (click)="upload.click()">Zmień zdjęcie profilowe</a>
+            </div>
+            <div class="option">
+                <a *ngIf="nickname.hidden" (click)="nickname.hidden = false">Zmień nazwę użytkownika</a>
+                <div class="input-box" hidden #nickname>
+                    <input #nicknameInput appInput placeholder="Nowa nazwa użytkownika...">
+                    <button 
+                        (click)="
+                            onSave(nicknameInput.value, 'nickname'); 
+                            nicknameInput.value !== '' && nickname.hidden = true
+                        "
+                    >
+                        <img src="../../assets/icons/yes-icon.svg" width="20px">
+                    </button>
+                    <button (click)="nickname.hidden = true">
+                        <img src="../../assets/icons/no-icon.svg" width="20px">
+                    </button>
+                </div>
+            </div>
+            <div class="option">
+                <a *ngIf="email.hidden" (click)="email.hidden = false">Zmień adres e-mail</a>
+                <div class="input-box" hidden #email>
+                    <input #emailInput appInput placeholder="Nowy adres e-mail..." type="email">
+                    <button (click)="onSave(emailInput.value, 'email')">
+                        <img src="../../assets/icons/yes-icon.svg" width="20px">
+                    </button>
+                    <button (click)="email.hidden = true">
+                        <img src="../../assets/icons/no-icon.svg" width="20px">
+                    </button>
+                </div>
+            </div>
+            <div class="option">
+                <a *ngIf="password.hidden" (click)="password.hidden = false">Zmień hasło</a>
+                <div class="input-box" hidden #password>
+                    <input #oldPasswordInput appInput placeholder="Stare hasło..." type="password"><br>
+                    <input #newPasswordInput appInput placeholder="Nowe hasło..." type="password">
+                    <button (click)="onChangePassword(oldPasswordInput.value, newPasswordInput.value)">
+                        <img src="../../assets/icons/yes-icon.svg" width="20px">
+                    </button>
+                    <button (click)="password.hidden = true">
+                        <img src="../../assets/icons/no-icon.svg" width="20px">
+                    </button>
+                </div>
+            </div>
+            <a (click)="onDeleteAccount()" class="delete-account">Usuń konto</a>
+        </div>
     </div>
 </div>

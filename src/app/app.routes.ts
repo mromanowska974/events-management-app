@@ -24,9 +24,6 @@ export const routes: Routes = [
         path: 'edit-event', component: AddEventComponent, canActivate: [loggedAuthGuard]
     },
     {
-        path: 'settings', component: SettingsComponent, canActivate: [loggedAuthGuard]
-    },
-    {
         path: 'page', 
         component: PageContainerComponent,
         canActivate: [loggedAuthGuard],
@@ -45,6 +42,9 @@ export const routes: Routes = [
             },
             {
                 path: 'notifications', component: NotificationPageComponent
+            },
+            {
+                path: 'settings', component: SettingsComponent
             }
         ]
     },

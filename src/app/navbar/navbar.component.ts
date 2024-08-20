@@ -77,7 +77,9 @@ export class NavbarComponent implements OnInit, OnDestroy{
   }
 
   onSettingsPanel(){
-    this.router.navigate(['settings']);
+    this.activePage = 'settings';
+    this.isMenuActive = false;
+    this.router.navigate(['page', 'settings']);
   }
 
   onChangePhrase(){

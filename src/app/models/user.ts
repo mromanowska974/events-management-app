@@ -3,5 +3,5 @@ export class User {
     nickname: string;
     email: string;
     notifications?: any;
-    profileImageUrl?: string;
+    profileImageUrl: string;
 }
