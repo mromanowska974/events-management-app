@@ -19,7 +19,7 @@
                     <input #nicknameInput appInput placeholder="Nowa nazwa użytkownika...">
                     <button 
                         (click)="
-                            onSave(nicknameInput.value, 'nickname'); 
+                            onChangeNickname(nicknameInput.value); 
                             nicknameInput.value !== '' && nickname.hidden = true
                         "
                     >
@@ -30,11 +30,12 @@
                     </button>
                 </div>
             </div>
-            <div class="option">
+            <div class="option" *ngIf="provider === 'password'">
                 <a *ngIf="email.hidden" (click)="email.hidden = false">Zmień adres e-mail</a>
                 <div class="input-box" hidden #email>
-                    <input #emailInput appInput placeholder="Nowy adres e-mail..." type="email">
-                    <button (click)="onSave(emailInput.value, 'email')">
+                    <input #emailInput appInput placeholder="Nowy adres e-mail..." type="email"> <br>
+                    <input #passwordInput appInput placeholder="Potwierdź zmianę hasłem..." type="password">
+                    <button (click)="onChangeEmail(emailInput.value, passwordInput.value)">
                         <img src="../../assets/icons/yes-icon.svg" width="20px">
                     </button>
                     <button (click)="email.hidden = true">
@@ -42,7 +43,7 @@
                     </button>
                 </div>
             </div>
-            <div class="option">
+            <div class="option" *ngIf="provider === 'password'">
                 <a *ngIf="password.hidden" (click)="password.hidden = false">Zmień hasło</a>
                 <div class="input-box" hidden #password>
                     <input #oldPasswordInput appInput placeholder="Stare hasło..." type="password"><br>
@@ -56,6 +57,12 @@
                 </div>
             </div>
             <a (click)="onDeleteAccount()" class="delete-account">Usuń konto</a>
+        </div>
+        <div class="provider-info" *ngIf="provider !== 'password'">
+            <p>
+                Użytkownik zalogowany przez: {{provider === 'google.com' ? 'Konto Google' : 'Konto Facebook'}}
+            </p>
+            <img [src]="provider === 'google.com' ? '../../assets/icons/google-icon.png' : '../../assets/icons/fb-icon.png'" width="40px">
         </div>
     </div>
 </div>

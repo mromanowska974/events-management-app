@@ -50,6 +50,14 @@ a {
     cursor: pointer;
 }
 
+.provider-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+}
+
 @media (orientation: portrait) {
     .widget {
         width: 90%;
