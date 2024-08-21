@@ -91,6 +91,28 @@ a {
     background-color: var(--darkBeige);
 }
 
+.notification-btn {
+    position: relative;
+}
+
+.notification-info {
+    position: absolute;
+    border-radius: 50%;
+    background-color: red;
+    width: 15px;
+    height: 15px;
+    top: 32px;
+    right: 0;
+}
+
+.notification-info p {
+    margin: 0;
+    color: white;
+    font-weight: bold;
+    position: relative;
+    top: 0;
+}
+
 @media (orientation: landscape) {
     .container{
         justify-content: end;

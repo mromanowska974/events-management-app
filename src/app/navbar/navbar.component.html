@@ -33,8 +33,11 @@
         <button>
             <img src="../../assets/icons/chat-icon.svg">
         </button>
-        <button *ngIf="activePage !== 'notifications'" (click)="onNotificationPage()">
+        <button class="notification-btn" *ngIf="activePage !== 'notifications'" (click)="onNotificationPage()">
             <img src="../../assets/icons/notification-icon.svg">
+            <div *ngIf="activeUser.notifications.length > 0" class="notification-info">
+                <p>{{ activeUser.notifications.length }}</p>
+            </div>
         </button>
         <button *ngIf="activePage !== 'calendar'" (click)="onCalendarPage()">
             <img src="../../assets/icons/calendar-icon.svg">
