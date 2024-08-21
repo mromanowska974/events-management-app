@@ -40,7 +40,7 @@ export class NotificationPageComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
       this.navigationService.setActivePage('notifications');
 
-      this.sub = this.userService.activeUser.subscribe(user => {
+      this.sub = this.userService.activeUser$.subscribe(user => {
         this.activeUser = user!
       })
   }

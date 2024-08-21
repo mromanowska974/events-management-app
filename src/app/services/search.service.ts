@@ -5,14 +5,14 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class SearchService {
-  searchPhrase = new BehaviorSubject<string>('');
-  searchPeriod = new BehaviorSubject<Date[]>([])
+  searchPhrase$ = new BehaviorSubject<string>('');
+  searchPeriod$ = new BehaviorSubject<Date[]>([])
 
   setSearchPhrase(phrase: string){
-    this.searchPhrase.next(phrase);
+    this.searchPhrase$.next(phrase);
   }
 
   setSearchPeriod(timeRange: Date[]){
-    this.searchPeriod.next(timeRange)
+    this.searchPeriod$.next(timeRange)
   }
 }

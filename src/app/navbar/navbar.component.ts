@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { SearchService } from '../services/search.service';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { WidgetDirective } from '../directives/widget.directive';
 
 @Component({
@@ -32,25 +32,21 @@ export class NavbarComponent implements OnInit, OnDestroy{
   activePage: string = '';
   searchPhrase: string = '';
   searchPeriod: Date[] = [];
-  activeUser: User;
+  activeUser$: Observable<User>;
   isMenuActive: boolean = false;
 
   navigationSub: Subscription;
-  userSub: Subscription;
 
   ngOnInit(): void {
-    this.navigationService.activePage.subscribe(page => {
+    this.navigationSub = this.navigationService.activePage.subscribe(page => {
       this.activePage = page
     })
 
-    this.userService.activeUser.subscribe(user => {
-      if (user) this.activeUser = user;
-    })
+    this.activeUser$ = this.userService.activeUser$.asObservable();
   }
 
   ngOnDestroy(): void {
       if(this.navigationSub) this.navigationSub.unsubscribe();
-      if(this.userSub) this.userSub.unsubscribe()
   }
 
   onLogout(){

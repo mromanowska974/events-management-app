@@ -40,7 +40,7 @@ export class SettingsComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
       this.navigationService.setActivePage('settings');
 
-      this.sub = this.userService.activeUser.subscribe(user => {
+      this.sub = this.userService.activeUser$.subscribe(user => {
         if(user) {
           this.activeUser = user;
           this.profileImgUrl = this.activeUser.profileImageUrl;

@@ -71,7 +71,7 @@ export class EventDetailsComponent implements OnInit, OnDestroy{
         })
       })
 
-      this.activeUserSub = this.userService.activeUser.subscribe(user => {
+      this.activeUserSub = this.userService.activeUser$.subscribe(user => {
         this.activeUser = user!
         this.userService.getAllUsers().then(users => {
           this.allUsers = users.filter(user => user.uid !== this.activeUser.uid);

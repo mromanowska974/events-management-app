@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { EventService } from '../services/event.service';
 import { SearchService } from '../services/search.service';
 import { Event } from '../models/event';
+import { combineLatest, map, Observable, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-main-page',
@@ -34,26 +35,34 @@ export class MainPageComponent implements OnInit{
 
   publicEvents: Event[] = [];
   eventsList: Event[] = [];
+
+  eventsList$;
   
   ngOnInit(): void {
     this.navigationService.setActivePage('main-page');
 
-    this.eventService.getPublicEvents().then(events => {
-      this.publicEvents = events;
-      
-      this.searchService.searchPhrase.subscribe(phrase => {
-        this.eventsList = this.publicEvents.slice();
-        this.eventsList = this.eventsList.filter(event => event.name.includes(phrase));
+    this.eventsList$ = combineLatest([
+      this.eventService.getPublicEvents(),
+      this.searchService.searchPhrase$.asObservable().pipe(),
+      this.searchService.searchPeriod$.asObservable().pipe()
+    ]).pipe(
+      map(([events, searchPhrase, searchPeriod]) => {
+        return (
+          (
+            searchPhrase ? events.filter(event => event.name.toLowerCase().includes(searchPhrase.toLowerCase())) : events
+            &&
+            (
+              searchPeriod[0] && searchPeriod[1] 
+                ? events.filter(event => event.date > searchPeriod[0] && event.date < searchPeriod[1])
+                : (
+                    (!searchPeriod[0] && searchPeriod[1]) 
+                      ? events.filter(event => event.date < searchPeriod[1]) 
+                      : (searchPeriod[0] && !searchPeriod[1]) ? events.filter(event => event.date > searchPeriod[0]) : events
+                  )
+            )
+        ))
       })
-
-      this.searchService.searchPeriod.subscribe(timeRange => {
-        this.eventsList = this.publicEvents.slice();
-
-        if(timeRange[0] && timeRange[1]) this.eventsList = this.eventsList.filter(event => event.date > timeRange[0] && event.date < timeRange[1]);
-        else if(!timeRange[0] && timeRange[1]) this.eventsList = this.eventsList.filter(event => event.date < timeRange[1]);
-        else if(timeRange[0] && !timeRange[1]) this.eventsList = this.eventsList.filter(event => event.date > timeRange[0])
-      })
-    })
+    )
   }
 
   onAddEvent(){

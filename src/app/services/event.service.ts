@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { addDoc, collection, deleteDoc, doc, Firestore, getDoc, getDocs, updateDoc, where } from '@angular/fire/firestore';
 import { query } from 'firebase/firestore';
 import { Event } from '../models/event';
+import { from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -92,10 +93,10 @@ export class EventService {
     }))
   }
 
-  getPublicEvents(){
+  getPublicEvents(): Observable<Event[]>{
     const accessQuery = query(this.collectionRef, where('access', '==', 'Publiczne'))
 
-    return getDocs(accessQuery).then(data => data.docs.map(doc => {
+    return from(getDocs(accessQuery).then(data => data.docs.map(doc => {
       return {
         id: doc.id,
         name: doc.data()['name'],
@@ -107,7 +108,7 @@ export class EventService {
         ownerId: doc.data()['ownerId'],
         members: doc.data()['members']
       }
-    }))
+    })))
   }
 
   deleteEvent(eid: string){

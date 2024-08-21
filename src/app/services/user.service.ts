@@ -11,10 +11,10 @@ export class UserService {
   private firestore = inject(Firestore)
   private storage = inject(Storage);
 
-  activeUser = new BehaviorSubject(null);
+  activeUser$ = new BehaviorSubject<User>(new User());
 
   setActiveUser(user: any){
-    this.activeUser.next(user)
+    this.activeUser$.next(user)
   }
 
   async createUser(uid: string, email: string){
