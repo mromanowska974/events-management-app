@@ -36,15 +36,15 @@ export class MainPageComponent implements OnInit{
   publicEvents: Event[] = [];
   eventsList: Event[] = [];
 
-  eventsList$;
+  eventsList$: Observable<Event[]>;
   
   ngOnInit(): void {
     this.navigationService.setActivePage('main-page');
 
     this.eventsList$ = combineLatest([
       this.eventService.getPublicEvents(),
-      this.searchService.searchPhrase$.asObservable().pipe(),
-      this.searchService.searchPeriod$.asObservable().pipe()
+      this.searchService.searchPhrase$.asObservable(),
+      this.searchService.searchPeriod$.asObservable()
     ]).pipe(
       map(([events, searchPhrase, searchPeriod]) => {
         return (

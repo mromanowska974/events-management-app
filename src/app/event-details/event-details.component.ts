@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 import { RequestService } from '../services/request.service';
 import { EventService } from '../services/event.service';
 import { NotificationService } from '../services/notification.service';
+import { ChatService } from '../services/chat.service';
 
 @Component({
   selector: 'app-event-details',
@@ -41,6 +42,7 @@ export class EventDetailsComponent implements OnInit, OnDestroy{
   router = inject(Router);
   eventService = inject(EventService);
   notificationService = inject(NotificationService);
+  chatService = inject(ChatService);
 
   activeUserSub: Subscription;
 
@@ -156,5 +158,9 @@ export class EventDetailsComponent implements OnInit, OnDestroy{
         })
       })
     }
+  }
+
+  onStartChat(user: User){
+    this.chatService.startChat(user).subscribe();
   }
 }

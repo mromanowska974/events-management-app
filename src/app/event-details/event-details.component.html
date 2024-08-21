@@ -31,7 +31,7 @@
                                 <p>{{ member.nickname }}<span *ngIf="member.uid === activeUser.uid"> (Ja)</span></p> 
                             </div>
                             <div class="member-btn-box">
-                                <button appButton *ngIf="member.uid !== activeUser.uid">Czat</button>
+                                <button appButton *ngIf="member.uid !== activeUser.uid" (click)="onStartChat(member)">Czat</button>
                                 <button appButton *ngIf="event.ownerId === activeUser.uid" (click)="onRemoveMember(member.uid)">Usuń</button>
                             </div>
                         </div>
