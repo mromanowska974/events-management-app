@@ -54,28 +54,10 @@ export class NavbarComponent implements OnInit, OnDestroy{
     this.router.navigate(['login'])
   }
 
-  onUserPanel(){
-    this.activePage = 'user-panel';
+  onSwitchPage(pageName: string){
+    this.activePage = pageName;
     this.isMenuActive = false;
-    this.router.navigate(['page', 'user-panel']);
-  }
-
-  onCalendarPage(){
-    this.activePage = 'calendar';
-    this.isMenuActive = false;
-    this.router.navigate(['page', 'calendar']);
-  }
-
-  onNotificationPage(){
-    this.activePage = 'notifications';
-    this.isMenuActive = false;
-    this.router.navigate(['page', 'notifications'])
-  }
-
-  onSettingsPanel(){
-    this.activePage = 'settings';
-    this.isMenuActive = false;
-    this.router.navigate(['page', 'settings']);
+    this.router.navigate(['page', pageName]);
   }
 
   onChangePhrase(){

@@ -1,0 +1,13 @@
+<div appContainer class="container">
+    <div appWidget class="widget">
+        <div class="chats-list">
+            <div class="chat" *ngFor="let chat of chats$ | async">
+                <img [src]="chat.chatImageUrl">
+                <p>{{ chat.chatName }}</p>
+            </div>
+        </div>
+        <div class="chat-content">
+    
+        </div>
+    </div>
+</div>

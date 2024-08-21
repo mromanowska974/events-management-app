@@ -13,7 +13,7 @@ export class UserService {
 
   activeUser$ = new BehaviorSubject<User>(new User());
 
-  setActiveUser(user: any){
+  setActiveUser(user: User){
     this.activeUser$.next(user)
   }
 

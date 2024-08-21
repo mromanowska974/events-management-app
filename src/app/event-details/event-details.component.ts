@@ -161,6 +161,8 @@ export class EventDetailsComponent implements OnInit, OnDestroy{
   }
 
   onStartChat(user: User){
-    this.chatService.startChat(user).subscribe();
+    this.chatService.startChat(user).subscribe(() => {
+      this.router.navigate(['page', 'chats'])
+    });
   }
 }

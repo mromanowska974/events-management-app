@@ -9,6 +9,7 @@ import { CalendarPageComponent } from './calendar-page/calendar-page.component';
 import { NotificationPageComponent } from './notification-page/notification-page.component';
 import { loggedAuthGuard, unloggedAuthGuard } from './auth-guard';
 import { SettingsComponent } from './settings/settings.component';
+import { ChatPanelComponent } from './chat-panel/chat-panel.component';
 
 export const routes: Routes = [
     {
@@ -45,6 +46,9 @@ export const routes: Routes = [
             },
             {
                 path: 'settings', component: SettingsComponent
+            },
+            {
+                path: 'chats', component: ChatPanelComponent
             }
         ]
     },
