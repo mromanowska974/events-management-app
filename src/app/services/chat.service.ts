@@ -1,9 +1,10 @@
 import { inject, Injectable } from '@angular/core';
-import { addDoc, collection, collectionData, Firestore, query, where } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, doc, Firestore, orderBy, query, Timestamp, updateDoc, where } from '@angular/fire/firestore';
 import { UserService } from './user.service';
 import { User } from '../models/user';
 import { concatMap, map, Observable, take } from 'rxjs';
 import { Chat } from '../models/chat';
+import { Message } from '../models/message';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,7 @@ export class ChatService {
     ) as Observable<Chat[]>;
   }
 
-  displayChats(activeUserId: string, chats: Chat[]){
+  private displayChats(activeUserId: string, chats: Chat[]){
     chats.forEach(chat => {
       const otherUserInfo = chat.userIds.indexOf(activeUserId) === 0 ? chat.usersInfo[1] : chat.usersInfo[0];
 
@@ -48,5 +49,31 @@ export class ChatService {
     });
 
     return chats;
+  }
+
+  sendMessage(chatId: string, message: string){
+    const chatsRef = collection(this.firestore, `chats/${chatId}/messages`);
+    const chatRef = doc(this.firestore, `chats/${chatId}`);
+
+    const senderId = localStorage.getItem('uid');
+    const today = Timestamp.fromDate(new Date());
+
+    return addDoc(chatsRef, {
+      text: message,
+      senderId: senderId,
+      sendDate: today
+    }).then(() => {
+      updateDoc(chatRef, {
+        lastMessage: message,
+        lastMessageDate: today
+      })
+    })
+  }
+
+  getChatMessages$(chatId: string): Observable<Message[]> {
+    const chatsRef = collection(this.firestore, `chats/${chatId}/messages`);
+    const queryAll = query(chatsRef, orderBy('sendDate', 'asc'));
+
+    return collectionData(queryAll) as Observable<Message[]>;
   }
 }

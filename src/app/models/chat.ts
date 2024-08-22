@@ -1,7 +1,9 @@
+import { Timestamp } from "firebase/firestore";
+
 export class Chat {
     id: string;
     lastMessage?: string;
-    lastmessageDate?: Date;
+    lastMessageDate?: Timestamp;
     userIds: string[];
     usersInfo: {name: string, photo: string}[]
     chatImageUrl?: string;

@@ -1,13 +1,43 @@
 <div appContainer class="container">
     <div appWidget class="widget">
         <div class="chats-list">
-            <div class="chat" *ngFor="let chat of chats$ | async">
-                <img [src]="chat.chatImageUrl">
-                <p>{{ chat.chatName }}</p>
+            <div class="chat-item" *ngFor="let chat of chats$ | async" (click)="onSelectChat(chat)">
+                <div class="image">
+                    <img [src]="chat.chatImageUrl">
+                </div>
+                <div class="chat-info">
+                    <div class="chat-info-top">
+                        <h3>{{ chat.chatName }}</h3>
+                        <p>{{ chat.lastMessageDate?.toDate() | date: 'medium' }}</p>
+                    </div>
+                    <p class="last-message-preview">{{ chat.lastMessage }}</p>
+                </div>
             </div>
         </div>
-        <div class="chat-content">
-    
+        <div class="chat-content" *ngIf="selectedChat">
+            <div class="header">
+                <img [src]="selectedChat.chatImageUrl">
+                <p>{{ selectedChat.chatName }}</p>
+            </div>
+            <div class="chat">
+                <div 
+                    class="message" 
+                    *ngFor="let message of messages$ | async"
+                    [ngClass]="message.senderId === activeUserUid ? 'my-message' : 'other-message'"
+                >
+                    <p class="sender">{{
+                        message.senderId === activeUserUid ? 'Ja' : selectedChat.chatName
+                    }}</p>
+                    <div class="message-text">
+                        <p>{{ message.text }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="enter-message">
+                <input [(ngModel)]="currentMessage" appInput (keydown.enter)="onSendMessage()" placeholder="Nowa wiadomość...">
+                <button appButton (click)="onSendMessage()">Wyślij</button>
+            </div>
         </div>
+        <p class="no-chat-selected" *ngIf="!selectedChat">Wybierz użytkownika aby rozpocząć rozmowę.</p>
     </div>
 </div>

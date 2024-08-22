@@ -1,5 +1,5 @@
 export class Message {
     text: string;
-    senderid: string;
+    senderId: string;
     sendDate: Date;
 }
