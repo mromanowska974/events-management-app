@@ -1,6 +1,6 @@
 <div class="container" appContainer>
+    <p *ngIf="errorMsg.length > 0" style="color: red;">{{ errorMsg }}</p>
     <div appWidget class="widget">
-        <p *ngIf="errorMsg.length > 0" style="color: red;">{{ errorMsg }}</p>
         <div class="input-box">
             <label>E-mail</label>
             <input appInput type="email" #email>
@@ -16,7 +16,7 @@
         <a class="forgot-password" (click)="onResetPassword(email.value)">Nie pamiętam hasła</a>
         <div class="alternative-login">
             <p>Wybierz inną metodę logowania</p>
-            <div class="btn-box">
+            <div class="alternative-btn-box">
                 <button (click)="onGoogleLogin()">
                     <img width="30px" src="../../assets/icons/google-icon.png">
                 </button>

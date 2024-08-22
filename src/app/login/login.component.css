@@ -1,6 +1,7 @@
 .container {
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 button {
@@ -9,26 +10,58 @@ button {
 }
 
 .widget {
-    width: 50vh;
-    height: 50vh;
+    width: calc(300px + 10vw);
+    height: calc(300px + 15vh);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: calc(5px + 0.4vh);
 }
 
 .input-box {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
+    width: calc(70% + 1.5vw);
+}
+
+.input-box label {
+    font-size: calc(10px + 1vh);
+}
+
+.input-box input {
+    height: calc(10px + 3vh);
+    font-size: calc(10px + 1vh);
 }
 
 .btn-box {
-    width: 60%;
+    width: calc(70% + 1.5vw);
+    height: calc(25px + 3vh);
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     margin: 5px 0;
+}
+
+.btn-box button {
+    font-size: calc(10px + 1vh);
+    height: 100%;
+}
+
+.alternative-btn-box {
+    width: calc(70% + 1.5vw);
+    display: flex;
+    justify-content: space-between;
+}
+
+.alternative-btn-box button {
+    border: none;
+    background-color: transparent;  
+}
+
+.alternative-btn-box button img {
+    width: calc(30px + 3vh);
+    height: calc(30px + 3vh);
 }
 
 .alternative-login {
@@ -39,6 +72,7 @@ button {
 
 .alternative-login p {
     margin: 5px 0 15px 0;
+    font-size: calc(10px + 1vh);
 }
 
 .alternative-login .btn-box button {
@@ -47,5 +81,11 @@ button {
 }
 
 .forgot-password {
-    font-size: 13px;
+    font-size: calc(10px + 0.8vh);
+}
+
+@media (orientation: portrait) {
+    .widget {
+        width: calc(50vw + 15vh);
+    }
 }

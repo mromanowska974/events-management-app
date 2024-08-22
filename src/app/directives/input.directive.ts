@@ -16,6 +16,5 @@ export class InputDirective implements OnInit{
     style.border = 'none';
     style.borderRadius = '10px 0px';
     style.boxShadow = 'inset 2px 2px 2px #bbbbbb';
-    style.height = '25px';
   }
 }

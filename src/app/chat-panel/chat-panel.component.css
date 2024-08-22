@@ -98,7 +98,7 @@
 
 .chat-content {
     width: 60vw;
-    margin: 0 10px;
+    margin: 0 calc(10px + 0.4vh);
     display: flex;
     flex-direction: column;
 }
