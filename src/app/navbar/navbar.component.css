@@ -1,7 +1,7 @@
 .container{
     display: flex;
     background-color: var(--darkRed);
-    height: 8vh;
+    height: calc(1vh+0.5px);
     width: 100%;
 }
 
@@ -35,13 +35,13 @@ a {
 .btn-box button {
     border: none;
     background-color: transparent;
-    height: 90%;
     padding: 0;
-    width: 18%;
+    height: calc(40px + 1vh);
+    width: calc(40px + 1vh);
 }
 
 .btn-box button img {
-    width: 80%;
+    width: 100%;
     height: 100%;
 }
 
@@ -113,13 +113,17 @@ a {
     top: 0;
 }
 
+a {
+    font-size: calc(10px + 1vh);
+}
+
 @media (orientation: landscape) {
     .container{
         justify-content: end;
     }
 
     .btn-box {
-        width: 23vw;
+        width: calc(20vw)
     }
 }
 
@@ -154,11 +158,15 @@ a {
     }
 
     .btn-box button {
-        height: 100%;
-        width: 25%;
+        height: calc(40px + 3vw);
+        width: calc(40px + 3vw);
+    }
+
+    a {
+        font-size: calc(2px + 3.5vw + 0.3vh);
     }
 
     .profile-image {
-        height: 60%;
+        height: 40%;
     }
 }
