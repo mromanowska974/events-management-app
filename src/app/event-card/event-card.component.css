@@ -7,38 +7,54 @@
 
 .info {
     display: flex;
+    justify-content: space-between;
 }
 
 .content {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 @media (orientation: landscape) {
-    h1 {
-        margin-left: 30px;
-    }    
+    .container {
+        padding: 0 calc(20px + 0.5vw);;
+    }   
     
     .content {
-        width: 80%;
+        width: calc(70% + 1.5vw);
     }
 
     button {
         align-self: center;
+        width: calc(90px + 0.5vw);
     }
 }
 
 @media (orientation: portrait) {
-    h1 {
-        margin-left: 10px;
+    .container {
+        padding: 0 calc(10px + 0.5vh);
     }   
 
     .info {
         flex-direction: column;
     }
 
+    .content {
+        font-size: calc(3px + 0.5vh + 1vw);
+    }
+
+    h1 {
+        margin: 10px 0;
+        font-size: calc(20px + 0.5vh + 1vw);
+    }
+
+    .content p {
+        margin: 0;
+    }
+
     button {
         align-self: flex-end;
-        margin: 10px;
+        margin: 10px 0;
+        height: calc(25px + 1vh);
     }
 }

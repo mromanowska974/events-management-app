@@ -16,7 +16,7 @@
 .add-btn {
     display: flex;
     align-items: center;
-    position: absolute;
+    position: fixed;
     border: none;
     border-radius: 50%;
     background-color: var(--darkRed);
@@ -30,8 +30,8 @@
 
 @media (orientation: landscape) {
     .add-btn {
-        width: 60px;
-        height: 60px;
+        width: calc(40px + 5vh);
+        height: calc(40px + 5vh);
         bottom: 30px;
         right: 30px;
     }
@@ -39,9 +39,9 @@
 
 @media (orientation: portrait) {
     .add-btn {
-        width: 50px;
-        height: 50px;
-        bottom: 20px;
-        right: 5px;
+        width: calc(40px + 2vh + 5vw);
+        height: calc(40px + 2vh + 5vw);
+        bottom: calc(20px + 2vh);
+        right: calc(5px + 5vw);
     }
 }
