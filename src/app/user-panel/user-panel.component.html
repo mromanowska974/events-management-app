@@ -3,14 +3,14 @@
         <h1>Moje wydarzenia:</h1>
         <div class="events-list">
             <p *ngIf="ownedEvents.length === 0"> Brak wydarzeń </p>
-            <app-event-card *ngFor="let event of ownedEvents" [event]="event"></app-event-card>
+            <app-event-card class="event" *ngFor="let event of ownedEvents" [event]="event"></app-event-card>
         </div>
     </div>
     <div class="section">
         <h1>Uczestniczę w:</h1>
         <div class="events-list">
             <p *ngIf="participatedEvents.length === 0"> Brak wydarzeń </p>
-            <app-event-card *ngFor="let event of participatedEvents" [event]="event"></app-event-card>
+            <app-event-card class="event" *ngFor="let event of participatedEvents" [event]="event"></app-event-card>
         </div>
     </div>
 </div>

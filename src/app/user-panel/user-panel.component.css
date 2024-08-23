@@ -1,12 +1,30 @@
 .container {
     align-items: center;
+    justify-content: space-evenly;
 }
 
 .section {
     width: 80%;
 }
 
+.section h1 {
+    margin: 0;
+    font-size: calc(2em - 0.4vh);
+}
+
 .events-list {
-    height: 30vh;
+    height: calc(80px + 50vh - 15vw);
     overflow-y: auto;
+}
+
+@media (orientation: landscape) {
+    .container {
+        height: 120vh !important;
+    }
+}
+
+@media (orientation: portrait) {
+    .events-list {
+        height: calc(150px + 20vh - 5vw)
+    }
 }
