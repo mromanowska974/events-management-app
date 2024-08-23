@@ -3,7 +3,7 @@
         <h1 class="username">{{ activeUser.nickname }}</h1>
         <div class="options">
             <div class="profile-image">
-                <img [src]="profileImgUrl" width="300px" height="300px">
+                <img [src]="profileImgUrl">
                 <input 
                     type="file" 
                     (change)="onUploadFile($event)" 

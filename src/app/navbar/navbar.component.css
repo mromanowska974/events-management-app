@@ -1,7 +1,7 @@
 .container{
     display: flex;
     background-color: var(--darkRed);
-    height: calc(1vh+0.5px);
+    height: calc(4vh + 40px);
     width: 100%;
 }
 

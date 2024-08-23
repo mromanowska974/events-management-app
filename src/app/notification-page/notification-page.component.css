@@ -27,7 +27,8 @@
 .btn-box {
     align-self: center;
     display: flex;
-    gap: 10px
+    gap: 10px;
+    height: 30px;
 }
 
 @media (orientation: portrait) {

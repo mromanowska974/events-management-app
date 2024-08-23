@@ -7,8 +7,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
     width: 60%;
+    height: 100%;
 }
 
 .options {
@@ -28,6 +28,8 @@
 .profile-image img {
     border-radius: 30%;
     border: 5px ridge var(--darkRed);
+    width: calc(100px + 10vh);
+    height: calc(100px + 10vh);
 }
 
 .delete-account {
@@ -46,8 +48,14 @@
     background-color: transparent;
 }
 
+h1 {
+    font-size: calc(2em + 1vh - 0.5vw);
+    margin: 5px;
+}
+
 a {
     cursor: pointer;
+    font-size: calc(1em + 0.5vh);
 }
 
 .provider-info {
@@ -55,11 +63,43 @@ a {
     flex-direction: column;
     align-items: center;
     position: absolute;
-    bottom: 0;
+    font-size: calc(1em + 0.5vh);
+    bottom: 50px;
+    text-wrap: wrap;
+    width: 70%;
+    text-align: center;
+}
+
+@media (orientation: landscape) {
+    .container {
+        height: 100% !important;
+        position: relative;
+    }
+
+    .widget {
+        min-height: 70vw;
+    }
 }
 
 @media (orientation: portrait) {
+    h1 {
+        font-size: calc(2em + 1vh);
+    }
+
+    a {
+        font-size: calc(1em + 0.5vh);
+    }
+
     .widget {
         width: 90%;
+    }
+
+    .profile-image img {
+        width: calc(200px + 10vw);
+        height: calc(200px + 10vw);
+    }
+
+    .provider-info {
+        bottom: -50px;
     }
 }
