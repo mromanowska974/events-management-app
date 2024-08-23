@@ -7,30 +7,34 @@ form {
     display: flex;
     flex-direction: column;
     width: 50%;
-    height: 70%;
+    height: calc(300px + 20vh - 4vw);
     align-items: center;
-    justify-content: center;
-    gap: 10px;
 }
 
 .input-box {
     display: flex;
     flex-direction: column;
     width: 100%;
+    font-size: calc(1em - 0.2vw);
 }
 
 .inputs-box {
     display: flex;
     flex-direction: column;
     width: 70%;
-    height: 80%;
+    height: 85%;
     align-items: flex-start;
     justify-content: center;
-    gap: 10px;
+    gap: calc(5px + 1vh - 0.5vw);
 }
 
 input, textarea {
     width: 100%;
+    font-size: calc(1em - 0.2vw);
+}
+
+input, select {
+    height: calc(1.3em + 1.0vh);
 }
 
 textarea {
@@ -41,6 +45,8 @@ textarea {
     width: 70%;
     display: flex;
     justify-content: space-evenly;
+    height: 10%;
+    padding: 2vh;
 }
 
 button {
