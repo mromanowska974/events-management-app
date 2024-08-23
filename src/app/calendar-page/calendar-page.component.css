@@ -12,6 +12,8 @@
 .box {
     width: 45%;
     margin: 0 2.5%;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .event {
@@ -37,5 +39,9 @@
 
     .box {
         width: 95%;
+    }
+
+    .events-list {
+        height: calc(20% + 10vw);
     }
 }
