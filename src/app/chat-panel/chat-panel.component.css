@@ -74,12 +74,12 @@
     align-items: center;
     gap: 10px;
     border-bottom: 1px solid var(--darkRed);
-    height: calc(7% + 0.4vh);
+    height: calc(7% + 3vh);
 }
 
 .header img {
-    width: calc(35px + 0.4vh);
-    height: calc(35px + 0.4vh);
+    width: calc(20px + 2.5vh);
+    height: calc(20px + 2.5vh );
 }
 
 .header p {
@@ -104,18 +104,27 @@
 }
 
 .chat {
-    height: calc(95% - 2*(5% + 0.4vh));
+    height: calc(95% - 2*(6% + 2.5vh));
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 }
 
 .enter-message {
     display: flex;
     justify-content: center;
     gap: 10px;
-    height: calc(3% + 0.4vh);
+    height: calc(5% + 2vh);
     border-top: 1px solid var(--darkRed);
-    padding: 15px 0;
+    padding: calc(10px + 2vh) 0;
+}
+
+.enter-message input{
+    height: calc(20px + 1vw);
+}
+
+.enter-message button{
+    height: calc(20px + 1vw);
 }
 
 .message {
