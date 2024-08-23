@@ -19,5 +19,5 @@
     border-radius: 10px;
     z-index: 2;
     width: 70vw;
-    height: 80vh;
+    height: calc(200px + 50vh - 5vw);
 }

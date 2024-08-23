@@ -19,10 +19,11 @@
             </div>
             <div class="right-box">
                 <div class="description">
+                    <h3>Opis:</h3>
                     <p>{{ event.description }}</p>
                 </div>
                 <div class="members-list">
-                    <p style="font-weight: bold;">Członkowie:</p>
+                    <h3>Członkowie:</h3>
                     <div class="scroll">
                         <p *ngIf="members.length === 0">Brak członków wydarzenia.</p>
                         <div class="member" *ngFor="let member of members">
@@ -80,7 +81,7 @@
                 </div>
             </div>
         </div>
-        <div class="btn-box">
+        <div class="modal-btn-box">
             <button appButton (click)="onSendInvitation()">Wyślij zaproszenie</button>
             <button appButton (click)="onCloseModal()">Anuluj</button>
         </div>
